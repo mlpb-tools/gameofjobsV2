@@ -1,0 +1,3218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 GAME OF JOBS – Forum de l'Emploi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+        
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(23,23,24,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(243,146,0,0.05) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 49%, rgba(23,23,24,0.02) 50%, transparent 51%);
+            color: #171718;
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 98px,
+                    rgba(23,23,24,0.01) 100px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 98px,
+                    rgba(23,23,24,0.01) 100px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #171718 0%, #2c2c2e 100%);
+            color: white;
+            padding: 60px 40px;
+            border: none;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: 
+                0 8px 32px rgba(23,23,24,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(243,146,0,0.1) 50%, transparent 70%),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255,255,255,0.02) 22px
+                );
+            z-index: 1;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #f39200 0%, #95c11f 25%, #2897d5 50%, #d60b52 75%, #a3195b 100%);
+            z-index: 3;
+        }
+
+        .header h1 {
+            font-family: 'Oswald', Arial, sans-serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.05em;
+            color: #f39200;
+            text-transform: uppercase;
+            text-shadow: 
+                3px 3px 0 #171718,
+                6px 6px 0 rgba(23,23,24,0.3),
+                0 0 30px rgba(243,146,0,0.5);
+            transform: perspective(500px) rotateX(15deg);
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            margin: 25px 0 20px 0;
+            position: relative;
+            z-index: 2;
+            line-height: 1.5;
+            font-weight: 600;
+            color: white;
+        }
+
+        .header .subtitle div {
+            margin: 10px 0;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 0;
+            display: inline-block;
+            color: white;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            border: none;
+            border-left: 6px solid #d60b52;
+            backdrop-filter: blur(10px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .header .subtitle div:nth-child(2) {
+            border-left-color: #2897d5;
+            margin-left: 15px;
+            transform: rotate(-1deg);
+        }
+
+        .header .subtitle div:nth-child(3) {
+            border-left-color: #95c11f;
+            margin-left: 30px;
+            transform: rotate(1deg);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            margin: 20px 0 0 0;
+            position: relative;
+            z-index: 2;
+            color: #171718;
+            font-weight: 600;
+            background: #f8f9fa;
+            padding: 15px 30px;
+            display: inline-block;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 2px solid #f39200;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(23,23,24,0.8) 0%, rgba(44,44,46,0.8) 100%);
+            backdrop-filter: blur(10px);
+            border-top: 3px solid #f39200;
+            border-bottom: 3px solid #f39200;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Oswald', Arial, sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(243,146,0,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: linear-gradient(135deg, #f39200 0%, #d17a00 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 25px rgba(243,146,0,0.4),
+                0 0 20px rgba(243,146,0,0.3);
+            border-color: #171718;
+        }
+
+        .page {
+            display: none;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
+            border-radius: 0;
+            padding: 40px;
+            box-shadow: 
+                0 12px 40px rgba(23,23,24,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            border: none;
+            border-left: 8px solid #f39200;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #f39200 0%, #95c11f 25%, #2897d5 50%, #d60b52 75%, #a3195b 100%);
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .game-sector, .special-sector {
+            width: 140px;
+            height: 140px;
+            border-radius: 0;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.2),
+                inset 0 -1px 0 rgba(0,0,0,0.2);
+            border: 3px solid #171718;
+            transform: perspective(1000px) rotateX(5deg);
+        }
+
+        .game-sector::before, .special-sector::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255,255,255,0.05) 12px
+                );
+            pointer-events: none;
+        }
+
+        .game-sector:hover, .special-sector:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-8px) scale(1.08);
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.4),
+                0 0 30px rgba(243,146,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+
+        .game-sector .sector-icon, .special-sector .sector-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .game-sector h4, .special-sector h4 {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .sector-controls {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .sector-controls button {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.9);
+            color: #171718;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .sector-controls button:hover {
+            background: #f39200;
+            color: white;
+            border-color: #f39200;
+            transform: scale(1.1);
+        }
+
+        .objective-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%);
+            border: 3px solid #171718;
+            border-radius: 0;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 6px 20px rgba(23,23,24,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .objective-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(243,146,0,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .objective-card:hover::before {
+            left: 100%;
+        }
+
+        .objective-card:hover {
+            border-color: #f39200;
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 12px 35px rgba(243,146,0,0.3),
+                0 0 20px rgba(243,146,0,0.2);
+        }
+
+        .objective-card.completed {
+            background: linear-gradient(135deg, #95c11f 0%, #7ba518 100%);
+            color: white;
+            border-color: #171718;
+            box-shadow: 
+                0 8px 30px rgba(149,193,31,0.4),
+                0 0 25px rgba(149,193,31,0.3);
+            transform: scale(1.05);
+        }
+
+        .objective-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .objective-card h4 {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        .objective-points {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f39200;
+            margin: 10px 0;
+        }
+
+        .objective-card.completed .objective-points {
+            color: white;
+        }
+
+        .objective-status {
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            color: #6c757d;
+            display: inline-block;
+        }
+
+        .objective-card.completed .objective-status {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f39200 0%, #d17a00 100%);
+            color: white;
+            border: 3px solid #171718;
+            padding: 18px 36px;
+            border-radius: 0;
+            font-weight: 700;
+            font-family: 'Oswald', Arial, sans-serif;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 8px 25px rgba(243,146,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 12px 35px rgba(243,146,0,0.4),
+                0 0 30px rgba(243,146,0,0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at center, rgba(23,23,24,0.8) 0%, rgba(23,23,24,0.9) 100%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(243,146,0,0.05) 22px
+                );
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
+            padding: 40px;
+            border-radius: 0;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 4px solid #171718;
+            box-shadow: 
+                0 20px 60px rgba(23,23,24,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #f39200 0%, #95c11f 25%, #2897d5 50%, #d60b52 75%, #a3195b 100%);
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%);
+            border-left: 8px solid #2897d5;
+            padding: 25px;
+            margin: 15px 0;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 2px solid #171718;
+            border-bottom: 2px solid #171718;
+            border-right: 2px solid #171718;
+            box-shadow: 
+                0 6px 20px rgba(23,23,24,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(40,151,213,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .question-card:hover::before {
+            left: 100%;
+        }
+
+        .question-card:hover {
+            background: linear-gradient(135deg, rgba(40,151,213,0.1) 0%, rgba(40,151,213,0.05) 100%);
+            transform: translateX(10px);
+            box-shadow: 
+                0 8px 30px rgba(40,151,213,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+
+        .question-card-colorful:hover {
+            transform: translateY(-8px) scale(1.05) rotate(1deg);
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.3),
+                0 0 30px rgba(243,146,0,0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%);
+            border-radius: 0;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 
+                0 8px 25px rgba(23,23,24,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            border: 3px solid #171718;
+            border-top: 8px solid #f39200;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 15px,
+                    rgba(243,146,0,0.03) 17px
+                );
+            pointer-events: none;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 15px 40px rgba(23,23,24,0.2),
+                0 0 25px rgba(243,146,0,0.2);
+        }
+
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #171718 0%, #2c2c2e 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 0;
+            text-align: center;
+            margin: 20px 0;
+            border: 4px solid #f39200;
+            box-shadow: 
+                0 12px 40px rgba(23,23,24,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 25px,
+                    rgba(243,146,0,0.05) 27px
+                );
+            pointer-events: none;
+        }
+
+        .score-number {
+            font-family: 'Oswald', Arial, sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 15px 0;
+            text-shadow: 
+                2px 2px 0 rgba(0,0,0,0.3),
+                0 0 20px rgba(243,146,0,0.5);
+            color: #f39200;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container { max-width: 100%; padding: 15px; }
+            .header h1 { font-size: 2.8rem; }
+            .game-sector, .special-sector { width: 110px; height: 110px; }
+            .game-sector h4, .special-sector h4 { font-size: 0.8rem; }
+        }
+
+        @media (max-width: 992px) {
+            .header { padding: 40px 30px; }
+            .header h1 { font-size: 2.5rem; }
+            .header .subtitle div { margin-left: 0 !important; margin: 5px 0; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .game-sector, .special-sector { width: 100px; height: 100px; }
+            .game-sector .sector-icon, .special-sector .sector-icon { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .header { padding: 30px 20px; }
+            .header h1 { font-size: 2rem; }
+            .header .subtitle { font-size: 1rem; }
+            .header .subtitle div { 
+                display: block; 
+                margin: 8px auto; 
+                padding: 10px 15px;
+                max-width: 280px;
+            }
+            .header p { 
+                font-size: 1rem; 
+                padding: 12px 20px; 
+                margin: 15px auto 0 auto;
+                max-width: 300px;
+            }
+            
+            /* Navigation responsive */
+            .navigation { 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 10px;
+            }
+            .nav-btn { 
+                width: 100%; 
+                max-width: 300px; 
+                padding: 12px 20px; 
+                font-size: 0.9rem;
+            }
+            
+            /* QG responsive */
+            #qg {
+                padding: 20px;
+                margin: 0 auto;
+            }
+            #qg h3 { font-size: 1rem; }
+            #qg .sector-icon { font-size: 2rem; }
+            
+            /* Secteurs responsive */
+            #map .page > div:first-child {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            /* Boutons d'action responsive */
+            #map .page > div:nth-child(2) {
+                flex-direction: column;
+                align-items: center;
+            }
+            #map .page > div:nth-child(2) button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            /* Stats responsive */
+            .stats-grid { 
+                grid-template-columns: 1fr; 
+                gap: 15px; 
+            }
+            
+            /* Objectifs responsive */
+            #map .page > div:last-child + div {
+                padding: 20px;
+            }
+            #map .page > div:last-child + div > div:last-child {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            /* Score responsive */
+            .score-display {
+                padding: 20px 15px;
+            }
+            .score-display > div:last-child {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            /* Modal responsive */
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+                max-height: 90vh;
+            }
+            
+            /* Tableau responsive */
+            #companyTracker {
+                min-width: 600px;
+            }
+            
+            /* Questions colorées responsive */
+            .question-card-colorful {
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.8rem; }
+            .header { padding: 20px 15px; }
+            .header .subtitle div { 
+                font-size: 0.9rem; 
+                padding: 8px 12px;
+            }
+            
+            /* QG plus compact */
+            #qg {
+                padding: 15px;
+            }
+            #qg h3 { font-size: 0.9rem; }
+            
+            /* Secteurs en 1 colonne sur très petit écran */
+            #map .page > div:first-child {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Objectifs en 1 colonne */
+            #map .page > div:last-child + div > div:last-child {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Badges en 1 colonne */
+            .stats-grid,
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Boutons plus petits */
+            .btn-primary, .nav-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            /* Chat bubble masqué sur mobile */
+            #chatBubble {
+                display: none;
+            }
+        }
+
+        /* Orientation paysage sur mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            #map .page > div:first-child {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Améliorations tactiles */
+        @media (hover: none) and (pointer: coarse) {
+            .objective-card, .nav-btn, .btn-primary {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Espacement plus généreux pour le tactile */
+            .navigation { gap: 15px; }
+            .stats-grid { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <!-- Logo en haut à gauche -->
+            <div style="position: absolute; top: 20px; left: 20px; z-index: 3;">
+                <img src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" 
+                     alt="Logo Mission Locale" 
+                     style="height: 50px; width: auto; background: rgba(255,255,255,0.95); padding: 8px 12px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
+                     onerror="this.style.display='none'; console.log('Logo failed to load');">
+            </div>
+            
+            <!-- Sélecteur de langue en haut à droite -->
+            <div style="position: absolute; top: 20px; right: 20px; z-index: 3; display: flex; gap: 5px;">
+                <button onclick="changeLanguage('fr')" id="langFr" style="background: linear-gradient(135deg, #f39200 0%, #d17a00 100%); color: white; border: 2px solid #171718; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(243,146,0,0.3);">
+                    🇫🇷 FR
+                </button>
+                <button onclick="changeLanguage('es')" id="langEs" style="background: rgba(255,255,255,0.9); color: #171718; border: 2px solid #171718; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    🇪🇸 ES
+                </button>
+            </div>
+            
+            <h1 data-translate="title">GAME OF JOBS</h1>
+            
+            <!-- Éléments décoratifs Mission Locale -->
+            <div style="position: absolute; top: 30px; right: 30px; width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; z-index: 3; animation: gentleFloat 3s ease-in-out infinite;"></div>
+            
+            <div style="position: absolute; bottom: 30px; left: 30px; width: 60px; height: 60px; background: rgba(255,255,255,0.15); border-radius: 20px; z-index: 3; animation: gentleFloat 4s ease-in-out infinite reverse;"></div>
+            
+            <div class="subtitle">
+                <div data-translate="subtitle1">🇫🇷 <strong>Trouve ton job</strong></div>
+                <div data-translate="subtitle2">🇪🇸 <strong>¡Encuentra tu trabajo!</strong></div>
+                <div data-translate="subtitle3">🇪🇺 <strong>Aurkitu zure lana !</strong></div>
+            </div>
+            <p data-translate="forum_title">Forum de l'Emploi - Réseau des Missions Locales</p>
+        </header>
+
+        <nav class="navigation">
+            <button class="nav-btn active" onclick="showPage('map')" data-translate="nav_map">🗺️ Carte Interactive</button>
+            <button class="nav-btn" onclick="showPage('rules')" data-translate="nav_rules">📋 Règles du Jeu</button>
+            <button class="nav-btn" onclick="showPage('progress')" data-translate="nav_progress">📊 Mon Parcours</button>
+            <button class="nav-btn" onclick="showPage('questions')" data-translate="nav_questions">❓ Questions Fréquentes</button>
+            <button class="nav-btn" onclick="showPage('rewards')" data-translate="nav_rewards">🏆 Récompenses</button>
+        </nav>
+
+        <!-- Page 1: Carte Interactive (Version 20) -->
+        <div id="map" class="page active">
+            <!-- Bandeau supérieur avec secteurs/entreprises -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 30px;">
+                <!-- Commerce -->
+                <div style="background: linear-gradient(135deg, #f39200 0%, #d17a00 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(243,146,0,0.3);" onclick="openSector('commerce')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🛍️</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Commerce</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">2 entreprises</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('commerce')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Industrie -->
+                <div style="background: linear-gradient(135deg, #95c11f 0%, #7ba518 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(149,193,31,0.3);" onclick="openSector('industrie')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">⚙️</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Industrie</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">1 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('industrie')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Numérique -->
+                <div style="background: linear-gradient(135deg, #a3195b 0%, #8a1449 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(163,25,91,0.3);" onclick="openSector('numerique')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">💻</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Numérique</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">1 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('numerique')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Santé/Social -->
+                <div style="background: linear-gradient(135deg, #2897d5 0%, #1e7bb8 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40,151,213,0.3);" onclick="openSector('sante')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🧑‍⚕️</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Santé/Social</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">1 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('sante')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Transport -->
+                <div style="background: linear-gradient(135deg, #d60b52 0%, #b8094a 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(214,11,82,0.3);" onclick="openSector('transport')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🚛</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Transport</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('transport')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Hôtellerie, Restauration -->
+                <div style="background: linear-gradient(135deg, #9f3d3f 0%, #7d2f31 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(159,61,63,0.3);" onclick="openSector('hotellerie')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🍽️</div>
+                        <h4 style="margin: 0; font-size: 0.8rem; font-weight: 700;">Hôtellerie, Restauration</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('hotellerie')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Animation -->
+                <div style="background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(111,66,193,0.3);" onclick="openSector('animation')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🎭</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Animation</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('animation')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Tourisme -->
+                <div style="background: linear-gradient(135deg, #fd7e14 0%, #e8590c 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253,126,20,0.3);" onclick="openSector('tourisme')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🏖️</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Tourisme</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('tourisme')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- BTP -->
+                <div style="background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(32,201,151,0.3);" onclick="openSector('btp')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🏗️</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">BTP</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('btp')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Agriculture -->
+                <div style="background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40,167,69,0.3);" onclick="openSector('agriculture')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🌾</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Agriculture</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('agriculture')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Sécurité -->
+                <div style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(108,117,125,0.3);" onclick="openSector('securite')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🛡️</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Sécurité</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('securite')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Apprentissages -->
+                <div style="background: linear-gradient(135deg, #e83e8c 0%, #c2185b 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(232,62,140,0.3);" onclick="openSector('apprentissages')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🎓</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Apprentissages</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('apprentissages')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Intérim -->
+                <div style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(23,162,184,0.3);" onclick="openSector('interim')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">⏰</div>
+                        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 700;">Intérim</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('interim')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+
+                <!-- Groupement d'Employeurs -->
+                <div style="background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%); color: white; border: 2px solid #171718; border-radius: 15px; padding: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(142,68,173,0.3);" onclick="openSector('groupement')">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 5px;">🤝</div>
+                        <h4 style="margin: 0; font-size: 0.8rem; font-weight: 700;">Groupement d'Employeurs</h4>
+                        <p style="margin: 3px 0 0 0; font-size: 0.7rem; opacity: 0.9;">0 entreprise</p>
+                        <button onclick="event.stopPropagation(); addCompanyToSector('groupement')" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">➕</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boutons d'action -->
+            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+                <button onclick="openCVOptions()" style="background: linear-gradient(135deg, #f39200 0%, #d17a00 100%); color: white; border: 3px solid #171718; padding: 15px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(243,146,0,0.3);" data-translate="btn_cv">
+                    📄 Mon CV
+                </button>
+                <button onclick="openChat()" style="background: linear-gradient(135deg, #2897d5 0%, #95c11f 100%); color: white; border: 3px solid #171718; padding: 15px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(40,151,213,0.3);" data-translate="btn_help">
+                    💬 Aide / Chat QG
+                </button>
+                <button onclick="addNewSector()" style="background: linear-gradient(135deg, #a3195b 0%, #d60b52 100%); color: white; border: 3px solid #171718; padding: 15px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(163,25,91,0.3);" data-translate="btn_new_sector">
+                    ➕ Nouveau Secteur
+                </button>
+            </div>
+
+            <h2 style="color: #f39200; font-size: 2.5rem; margin-bottom: 10px; text-align: center;" data-translate="main_title">🗺️ Ta mission commence ici !</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #171718; margin-bottom: 30px;" data-translate="main_subtitle">Explore le Forum de l'Emploi et découvre toutes les opportunités qui t'attendent</p>
+            
+            <!-- Score et progression -->
+            <div style="background: linear-gradient(135deg, #f39200 0%, #95c11f 100%); color: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                    <div>
+                        <h3 style="margin: 0; font-family: 'Inter', sans-serif; font-size: 1.5rem;" data-translate="total_score">Score Total</h3>
+                        <div id="totalScore" style="font-size: 2.5rem; font-weight: 700; margin: 5px 0;">140</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <div style="background: rgba(255,255,255,0.2); border-radius: 10px; height: 20px; margin: 10px 0;">
+                            <div id="globalProgress" style="background: white; height: 100%; border-radius: 10px; width: 35%; transition: width 0.5s ease;"></div>
+                        </div>
+                        <small data-translate="general_progress">Progression générale : 35%</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QG Mission Locale centré -->
+            <div style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 25px; padding: 40px; margin-bottom: 30px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <div id="qg" style="background: linear-gradient(135deg, #2897d5 0%, #95c11f 100%); color: white; padding: 30px; border-radius: 25px; border: 3px solid rgba(255,255,255,0.3); text-align: center; cursor: pointer; box-shadow: 0 10px 30px rgba(40,151,213,0.2); display: inline-block; position: relative;" onclick="openQG()">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🏠</div>
+                    <h3 style="margin: 0; font-size: 1.2rem;">STAND</h3>
+                    <h3 style="margin: 0; font-size: 1.2rem;" data-translate="qg_title">MISSION LOCALE</h3>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9rem; opacity: 0.9;" data-translate="qg_subtitle">(QG)</p>
+                    <div id="chatBubble" style="position: absolute; top: -60px; left: 50%; transform: translateX(-50%); background: white; color: #171718; padding: 10px 15px; border-radius: 15px; border: 2px solid #171718; font-size: 0.9rem; white-space: nowrap; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" data-translate="chat_bubble">
+                        💬 On est là si tu as des questions !
+                        <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid white;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Objectifs et points -->
+            <div style="background: white; border: 2px solid #171718; border-radius: 15px; padding: 25px; margin-top: 30px;">
+                <h3 style="color: #f39200; margin-bottom: 20px; text-align: center;" data-translate="objectives_title">🏆 Tes Objectifs Points</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div class="objective-card" id="obj1" onclick="completeObjective('presence')">
+                        <div class="objective-icon">✅</div>
+                        <h4 data-translate="presence_obj">Feuille de présence signée</h4>
+                        <div class="objective-points">+10 pts</div>
+                        <div class="objective-status" data-translate="todo_status">À faire</div>
+                    </div>
+                    <div class="objective-card" id="obj2" onclick="completeObjective('secteurs')">
+                        <div class="objective-icon">🧭</div>
+                        <h4 data-translate="sectors_obj">3 secteurs ciblés</h4>
+                        <div class="objective-points">+10 pts</div>
+                        <div class="objective-status" data-translate="todo_status">À faire</div>
+                    </div>
+                    <div class="objective-card" id="obj3" onclick="completeObjective('debrief')">
+                        <div class="objective-icon">🎤</div>
+                        <h4 data-translate="debrief_obj">Débrief retour QG</h4>
+                        <div class="objective-points">+20 pts</div>
+                        <div class="objective-status" data-translate="todo_status">À faire</div>
+                    </div>
+                    <div class="objective-card" id="obj4" onclick="completeObjective('partenaire')">
+                        <div class="objective-icon">💫</div>
+                        <h4 data-translate="partner_obj">Visite partenaire ML</h4>
+                        <div class="objective-points">+100 pts</div>
+                        <div class="objective-status" data-translate="todo_status">À faire</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Règles du Jeu (Version 11) -->
+        <div id="rules" class="page">
+            <h2 style="color: #f39200; font-size: 2.5rem; margin-bottom: 30px; text-align: center;">📋 Règles du Jeu</h2>
+            
+            <div style="background: linear-gradient(135deg, #2897d5 0%, #95c11f 100%); color: white; padding: 30px; border-radius: 20px; margin-bottom: 30px;">
+                <h3 style="text-align: center; margin-bottom: 20px;">🎯 Objectif Principal</h3>
+                <p style="font-size: 1.2rem; text-align: center; margin: 0;">Explore le forum, rencontre des recruteurs, pose des questions et décroche ton job de rêve !</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 30px;">
+                <div style="background: white; border: 3px solid #f39200; border-radius: 15px; padding: 25px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🎮</div>
+                        <h3 style="color: #f39200; margin: 0;">Comment Jouer</h3>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <strong>1.</strong> Clique sur les secteurs pour les explorer
+                        </li>
+                        <li style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <strong>2.</strong> Rencontre les recruteurs et pose des questions
+                        </li>
+                        <li style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <strong>3.</strong> Dépose ton CV dans les entreprises
+                        </li>
+                        <li style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <strong>4.</strong> Accumule des points et débloque des badges
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="background: white; border: 3px solid #95c11f; border-radius: 15px; padding: 25px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">⭐</div>
+                        <h3 style="color: #95c11f; margin: 0;">Système de Points</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <span>Visite d'un secteur</span>
+                            <span style="font-weight: bold; color: #f39200;">+20 pts</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <span>Question posée</span>
+                            <span style="font-weight: bold; color: #f39200;">+50 pts</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <span>CV déposé</span>
+                            <span style="font-weight: bold; color: #f39200;">+100 pts</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <span>Contact obtenu</span>
+                            <span style="font-weight: bold; color: #f39200;">+200 pts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; border: 3px solid #2897d5; border-radius: 15px; padding: 25px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🏆</div>
+                        <h3 style="color: #2897d5; margin: 0;">Badges à Débloquer</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-weight: bold;">🧭 Explorateur</div>
+                            <div style="font-size: 0.9rem; color: #6c757d;">Visite 3 secteurs différents</div>
+                        </div>
+                        <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-weight: bold;">💬 Communicateur</div>
+                            <div style="font-size: 0.9rem; color: #6c757d;">Pose 5 questions aux recruteurs</div>
+                        </div>
+                        <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-weight: bold;">📄 Candidat Pro</div>
+                            <div style="font-size: 0.9rem; color: #6c757d;">Dépose ton CV dans 3 entreprises</div>
+                        </div>
+                        <div style="padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-weight: bold;">🌟 Job Hunter</div>
+                            <div style="font-size: 0.9rem; color: #6c757d;">Obtiens un contact ou entretien</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; border: 2px solid #171718; border-radius: 15px; padding: 25px;">
+                <h3 style="color: #a3195b; text-align: center; margin-bottom: 20px;">🏆 Badges à Débloquer</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="background: linear-gradient(135deg, #95c11f 0%, #7ba518 100%); color: white; padding: 20px; border-radius: 15px; text-align: center; position: relative;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🧭</div>
+                        <h4 style="margin: 0 0 10px 0;">Explorateur</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Visite 3 secteurs différents</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+60 points</div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #2897d5 0%, #1e7bb8 100%); color: white; padding: 20px; border-radius: 15px; text-align: center; position: relative;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">💬</div>
+                        <h4 style="margin: 0 0 10px 0;">Communicateur</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Pose 5 questions aux recruteurs</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+250 points</div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #f39200 0%, #d17a00 100%); color: white; padding: 20px; border-radius: 15px; text-align: center; position: relative;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">📄</div>
+                        <h4 style="margin: 0 0 10px 0;">Candidat Pro</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Dépose ton CV dans 3 entreprises</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+300 points</div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #a3195b 0%, #8a1449 100%); color: white; padding: 20px; border-radius: 15px; text-align: center; position: relative;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🌟</div>
+                        <h4 style="margin: 0 0 10px 0;">Job Hunter</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Obtiens un contact ou entretien</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+500 points</div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #95c11f 0%, #2897d5 100%); color: white; padding: 20px; border-radius: 15px; text-align: center; position: relative;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🌱</div>
+                        <h4 style="margin: 0 0 10px 0;">Eco Warrior</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Complète 5000 pas pendant le forum</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+150 points</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Mon Parcours (Version 11) -->
+        <div id="progress" class="page">
+            <h2 style="color: #f39200; font-size: 2.5rem; margin-bottom: 30px; text-align: center;">📊 Mon Parcours</h2>
+            
+            <div class="score-display">
+                <h3 style="margin: 0 0 15px 0;">🎯 Ton Score Actuel</h3>
+                <div class="score-number" id="currentScore">140</div>
+                <div style="font-size: 1.2rem; margin-bottom: 20px;">points obtenus</div>
+                
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 15px;">
+                    <div style="font-weight: 600; margin-bottom: 10px;">Progression Générale</div>
+                    <div style="background: rgba(255,255,255,0.3); border-radius: 10px; height: 20px; margin: 10px 0;">
+                        <div style="background: white; height: 100%; border-radius: 10px; width: 35%; transition: width 0.5s ease;"></div>
+                    </div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">35% de ton objectif atteint</div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon-large">🏢</div>
+                    <h3 style="color: #f39200; margin: 10px 0;">Secteurs Visités</h3>
+                    <div style="font-size: 2rem; font-weight: 700; color: #171718;" id="sectorsCount">3</div>
+                    <div style="color: #6c757d; font-size: 0.9rem;">sur 12 disponibles</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon-large">💬</div>
+                    <h3 style="color: #2897d5; margin: 10px 0;">Questions Posées</h3>
+                    <div style="font-size: 2rem; font-weight: 700; color: #171718;" id="questionsCount">2</div>
+                    <div style="color: #6c757d; font-size: 0.9rem;">interactions réalisées</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon-large">📄</div>
+                    <h3 style="color: #95c11f; margin: 10px 0;">CV Déposés</h3>
+                    <div style="font-size: 2rem; font-weight: 700; color: #171718;" id="cvsCount">1</div>
+                    <div style="color: #6c757d; font-size: 0.9rem;">candidatures actives</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon-large">⭐</div>
+                    <h3 style="color: #a3195b; margin: 10px 0;">Badges Obtenus</h3>
+                    <div style="font-size: 2rem; font-weight: 700; color: #171718;" id="badgesCount">1</div>
+                    <div style="color: #6c757d; font-size: 0.9rem;">sur 4 possibles</div>
+                </div>
+            </div>
+
+            <div style="background: white; border: 2px solid #171718; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <h3 style="color: #2897d5; text-align: center; margin-bottom: 25px;">🏆 Tes Badges</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="background: linear-gradient(135deg, #95c11f 0%, #7ba518 100%); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🧭</div>
+                        <h4 style="margin: 0 0 10px 0;">Explorateur</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">3 secteurs visités</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">✅ Obtenu</div>
+                    </div>
+
+                    <div style="background: #f8f9fa; border: 2px dashed #e9ecef; color: #6c757d; padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">💬</div>
+                        <h4 style="margin: 0 0 10px 0;">Communicateur</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">5 questions posées</p>
+                        <div style="background: #e9ecef; padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">🔒 Bloqué</div>
+                    </div>
+
+                    <div style="background: #f8f9fa; border: 2px dashed #e9ecef; color: #6c757d; padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">📄</div>
+                        <h4 style="margin: 0 0 10px 0;">Candidat Pro</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">3 CV déposés</p>
+                        <div style="background: #e9ecef; padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">🔒 Bloqué</div>
+                    </div>
+
+                    <div style="background: #f8f9fa; border: 2px dashed #e9ecef; color: #6c757d; padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🌟</div>
+                        <h4 style="margin: 0 0 10px 0;">Job Hunter</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">Contact obtenu</p>
+                        <div style="background: #e9ecef; padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">🔒 Bloqué</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistiques en temps réel -->
+            <div style="background: linear-gradient(135deg, #f39200 0%, #95c11f 100%); color: white; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <h3 style="text-align: center; margin-bottom: 20px;">📊 Mes Statistiques en Temps Réel</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">👋</div>
+                        <div style="font-size: 2rem; font-weight: 700;" id="statPresentations">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Présentations</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">💬</div>
+                        <div style="font-size: 2rem; font-weight: 700;" id="statQuestions">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Questions</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">📄</div>
+                        <div style="font-size: 2rem; font-weight: 700;" id="statCVs">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">CV Déposés</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">📞</div>
+                        <div style="font-size: 2rem; font-weight: 700;" id="statSuivis">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Suivis</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau de suivi des entreprises -->
+            <div style="background: white; border: 2px solid #171718; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+                    <h3 style="color: #f39200; margin: 0;">📋 Mon Carnet de Bord</h3>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="addCompanyToTracker()" style="background: linear-gradient(135deg, #95c11f 0%, #7ba518 100%); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; box-shadow: 0 6px 20px rgba(149,193,31,0.4); transition: all 0.3s ease;">
+                            ➕ Ajouter une entreprise
+                        </button>
+                        <button onclick="clearAllTracking()" style="background: linear-gradient(135deg, #d60b52 0%, #b8094a 100%); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; box-shadow: 0 6px 20px rgba(214,11,82,0.4); transition: all 0.3s ease;">
+                            🗑️ Effacer tout
+                        </button>
+                        <button onclick="showPage('map')" style="background: linear-gradient(135deg, #f39200 0%, #d17a00 100%); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; box-shadow: 0 6px 20px rgba(243,146,0,0.4); transition: all 0.3s ease;">
+                            ⬅️ Retour au QG
+                        </button>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <table id="companyTracker" style="width: 100%; border-collapse: collapse; background: white; min-width: 800px;">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, #f39200 0%, #95c11f 100%); color: white;">
+                                <th style="padding: 15px; text-align: left; font-weight: 600; border-bottom: 2px solid #171718;">Entreprise</th>
+                                <th style="padding: 15px; text-align: center; font-weight: 600; border-bottom: 2px solid #171718; min-width: 120px;">👋 Présentation</th>
+                                <th style="padding: 15px; text-align: center; font-weight: 600; border-bottom: 2px solid #171718; min-width: 120px;">💬 Question posée</th>
+                                <th style="padding: 15px; text-align: center; font-weight: 600; border-bottom: 2px solid #171718; min-width: 120px;">📄 CV déposé</th>
+                                <th style="padding: 15px; text-align: center; font-weight: 600; border-bottom: 2px solid #171718; min-width: 120px;">📞 Suivi obtenu</th>
+                                <th style="padding: 15px; text-align: center; font-weight: 600; border-bottom: 2px solid #171718; min-width: 200px;">😃 Ressenti</th>
+                                <th style="padding: 15px; text-align: center; font-weight: 600; border-bottom: 2px solid #171718; width: 80px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trackerBody">
+                            <!-- Les lignes seront ajoutées dynamiquement -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="emptyTracker" style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 10px; margin-top: 20px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">📝</div>
+                    <h4 style="color: #6c757d; margin: 0 0 10px 0;">Ton carnet de bord est vide</h4>
+                    <p style="color: #6c757d; margin: 0 0 20px 0;">Commence à ajouter les entreprises que tu rencontres pour suivre tes démarches !</p>
+                    <button onclick="addCompanyToTracker()" style="background: #95c11f; color: white; border: none; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: 600;">
+                        ➕ Ajouter ma première entreprise
+                    </button>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #a3195b 0%, #8a1449 100%); color: white; border-radius: 15px; padding: 25px;">
+                <h3 style="text-align: center; margin-bottom: 20px;">🎯 Prochains Objectifs</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">💬</div>
+                        <h4 style="margin: 0 0 10px 0;">Pose 3 questions de plus</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Pour débloquer le badge Communicateur</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📄</div>
+                        <h4 style="margin: 0 0 10px 0;">Dépose 2 CV de plus</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Pour débloquer le badge Candidat Pro</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 4: Questions Fréquentes (Version 12) -->
+        <div id="questions" class="page">
+            <h2 style="color: #f39200; font-size: 2.5rem; margin-bottom: 30px; text-align: center;">❓ Questions à Poser aux Recruteurs</h2>
+            
+            <div style="background: linear-gradient(135deg, #2897d5 0%, #95c11f 100%); color: white; padding: 25px; border-radius: 20px; margin-bottom: 30px; text-align: center;">
+                <h3 style="margin-bottom: 15px;">💡 Brise la Glace !</h3>
+                <p style="margin: 0; font-size: 1.1rem;">Ces questions t'aident à briser la glace avec un recruteur !</p>
+                <p style="margin: 10px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Clique sur une question pour la copier et l'utiliser 📋</p>
+            </div>
+
+            <!-- Cartes de questions colorées -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                <div class="question-card-colorful" onclick="copyQuestion('Quelles qualités recherchez-vous pour ce poste ?')" style="background: linear-gradient(135deg, #f39200 0%, #ff6b35 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(243,146,0,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🎯</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Quelles qualités recherchez-vous ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Pour ce poste spécifiquement</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Quels métiers recrutent le plus actuellement ?')" style="background: linear-gradient(135deg, #95c11f 0%, #7ba518 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(149,193,31,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">💼</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Quels métiers recrutent le plus ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Dans votre secteur d'activité</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Proposez-vous des stages ou de l\'alternance ?')" style="background: linear-gradient(135deg, #2897d5 0%, #1e7bb8 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40,151,213,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🎓</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Proposez-vous des stages ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Ou de l'alternance pour débuter</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Faut-il obligatoirement un diplôme ?')" style="background: linear-gradient(135deg, #a3195b 0%, #8a1449 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(163,25,91,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">📚</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Faut-il un diplôme ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Ou privilégiez-vous l'expérience</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Peut-on postuler sans expérience ?')" style="background: linear-gradient(135deg, #d60b52 0%, #b8094a 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(214,11,82,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🌟</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Peut-on postuler sans expérience ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Formation sur le tas possible ?</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Comment se déroule une journée type ?')" style="background: linear-gradient(135deg, #9f3d3f 0%, #7d2f31 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(159,61,63,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">⏰</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Comment se déroule une journée type ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Dans ce poste concrètement</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Quelles sont les perspectives d\'évolution ?')" style="background: linear-gradient(135deg, #f39200 0%, #d17a00 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(243,146,0,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🚀</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Quelles perspectives d'évolution ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Possibilités de carrière</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Comment fonctionne l\'équipe ?')" style="background: linear-gradient(135deg, #95c11f 0%, #2897d5 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(149,193,31,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🤝</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Comment fonctionne l'équipe ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Ambiance et collaboration</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Quels sont les horaires et la rémunération ?')" style="background: linear-gradient(135deg, #2897d5 0%, #a3195b 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40,151,213,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">💰</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Quels sont les horaires / rémunération ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Conditions de travail</p>
+                </div>
+
+                <div class="question-card-colorful" onclick="copyQuestion('Comment puis-je vous recontacter ?')" style="background: linear-gradient(135deg, #a3195b 0%, #d60b52 100%); color: white; padding: 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(163,25,91,0.3);">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">📞</div>
+                    <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Comment vous recontacter ?</h4>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Pour un suivi de candidature</p>
+                </div>
+            </div>
+
+            <!-- Zone questions personnelles -->
+            <div style="background: white; border: 2px solid #171718; border-radius: 15px; padding: 25px; margin-bottom: 30px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <div style="font-size: 2rem;">✏️</div>
+                    <h3 style="color: #f39200; margin: 0;">Mes Questions Personnelles</h3>
+                </div>
+                <p style="color: #6c757d; margin-bottom: 20px;">Note ici tes propres questions selon ton profil et tes intérêts :</p>
+                
+                <div id="personalQuestions" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                    <!-- Les questions personnelles seront ajoutées ici -->
+                </div>
+                
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="newPersonalQuestion" placeholder="Ex: Proposez-vous des formations en interne ?" style="flex: 1; min-width: 250px; padding: 12px; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem;">
+                    <button onclick="addPersonalQuestion()" style="background: #95c11f; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; white-space: nowrap;">
+                        ➕ Ajouter
+                    </button>
+                </div>
+            </div>
+
+            <!-- FAQ classique -->
+            <div style="background: #f8f9fa; border-radius: 15px; padding: 25px;">
+                <h3 style="color: #2897d5; text-align: center; margin-bottom: 25px;">💡 Questions Fréquentes sur le Forum</h3>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div class="question-card" onclick="toggleAnswer('q1')">
+                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="margin: 0; color: #171718;">Comment gagner plus de points rapidement ?</h4>
+                            <div style="font-size: 1.5rem; color: #2897d5;">+</div>
+                        </div>
+                        <div id="q1" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e9ecef; color: #6c757d;">
+                            <p>Pour maximiser tes points :</p>
+                            <ul>
+                                <li>Visite plusieurs secteurs différents (+20 pts chacun)</li>
+                                <li>Pose des questions aux recruteurs (+50 pts chacune)</li>
+                                <li>Dépose ton CV dans les entreprises (+100 pts)</li>
+                                <li>Obtiens des contacts ou entretiens (+200 pts)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer('q2')">
+                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="margin: 0; color: #171718;">Que dire quand je me présente à un recruteur ?</h4>
+                            <div style="font-size: 1.5rem; color: #2897d5;">+</div>
+                        </div>
+                        <div id="q2" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e9ecef; color: #6c757d;">
+                            <p>Prépare un pitch de 30 secondes avec :</p>
+                            <ul>
+                                <li>Ton prénom et ton âge</li>
+                                <li>Ta formation actuelle ou ton parcours</li>
+                                <li>Ce que tu recherches (stage, alternance, emploi)</li>
+                                <li>Tes qualités principales</li>
+                                <li>Pourquoi ce secteur t'intéresse</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer('q3')">
+                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="margin: 0; color: #171718;">Comment débloquer tous les badges ?</h4>
+                            <div style="font-size: 1.5rem; color: #2897d5;">+</div>
+                        </div>
+                        <div id="q3" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e9ecef; color: #6c757d;">
+                            <p>Guide des badges :</p>
+                            <ul>
+                                <li><strong>🧭 Explorateur :</strong> Visite 3 secteurs différents</li>
+                                <li><strong>💬 Communicateur :</strong> Pose 5 questions aux recruteurs</li>
+                                <li><strong>📄 Candidat Pro :</strong> Dépose ton CV dans 3 entreprises</li>
+                                <li><strong>🌟 Job Hunter :</strong> Obtiens un contact ou entretien</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer('q4')">
+                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                            <h4 style="margin: 0; color: #171718;">Que faire si je suis timide ?</h4>
+                            <div style="font-size: 1.5rem; color: #2897d5;">+</div>
+                        </div>
+                        <div id="q4" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e9ecef; color: #6c757d;">
+                            <p>Conseils pour les plus timides :</p>
+                            <ul>
+                                <li>Commence par observer et écouter</li>
+                                <li>Prépare tes questions à l'avance</li>
+                                <li>Commence par les stands moins fréquentés</li>
+                                <li>N'hésite pas à demander de l'aide aux conseillers</li>
+                                <li>Rappelle-toi que les recruteurs sont là pour t'aider</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #a3195b 0%, #8a1449 100%); color: white; border-radius: 15px; padding: 25px; margin-top: 30px;">
+                <h3 style="text-align: center; margin-bottom: 20px;">💬 Encore des Questions ?</h3>
+                <div style="text-align: center;">
+                    <p style="margin-bottom: 20px;">N'hésite pas à contacter tes conseillers Mission Locale !</p>
+                    <button onclick="showPage('map')" style="background: white; color: #a3195b; border: none; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: 600;">
+                        ⬅️ Retour au QG
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 5: Récompenses (Version 11) -->
+        <div id="rewards" class="page">
+            <h2 style="color: #f39200; font-size: 2.5rem; margin-bottom: 30px; text-align: center;">🏆 Récompenses</h2>
+            
+            <div class="score-display">
+                <h3 style="margin: 0 0 15px 0;">🎯 Ton Score Final</h3>
+                <div class="score-number" id="finalScore">140</div>
+                <div style="font-size: 1.2rem; margin-bottom: 20px;">points obtenus</div>
+                
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 15px;">
+                    <div style="font-weight: 600; margin-bottom: 10px;">🏅 Ton Classement</div>
+                    <div style="font-size: 1.5rem; font-weight: 700;">#8 sur 32 participants</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Tu es dans le top 25% ! 🎉</div>
+                </div>
+            </div>
+
+            <div style="background: white; border: 2px solid #171718; border-radius: 15px; padding: 25px; margin-bottom: 30px;">
+                <h3 style="color: #f39200; text-align: center; margin-bottom: 25px;">🏅 Tes Badges Obtenus</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="background: linear-gradient(135deg, #95c11f 0%, #7ba518 100%); color: white; padding: 20px; border-radius: 15px; text-align: center; position: relative;">
+                        <div style="position: absolute; top: -10px; right: -10px; background: #ffd700; color: #171718; padding: 5px; border-radius: 50%; font-size: 0.8rem; font-weight: 700;">✓</div>
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🧭</div>
+                        <h4 style="margin: 0 0 10px 0;">Explorateur</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">3 secteurs visités</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+60 points</div>
+                    </div>
+
+                    <div style="background: #f8f9fa; border: 2px dashed #e9ecef; color: #6c757d; padding: 20px; border-radius: 15px; text-align: center; opacity: 0.6;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">💬</div>
+                        <h4 style="margin: 0 0 10px 0;">Communicateur</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">5 questions posées</p>
+                        <div style="background: #e9ecef; padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+250 points</div>
+                    </div>
+
+                    <div style="background: #f8f9fa; border: 2px dashed #e9ecef; color: #6c757d; padding: 20px; border-radius: 15px; text-align: center; opacity: 0.6;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">📄</div>
+                        <h4 style="margin: 0 0 10px 0;">Candidat Pro</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">3 CV déposés</p>
+                        <div style="background: #e9ecef; padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+300 points</div>
+                    </div>
+
+                    <div style="background: #f8f9fa; border: 2px dashed #e9ecef; color: #6c757d; padding: 20px; border-radius: 15px; text-align: center; opacity: 0.6;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🌟</div>
+                        <h4 style="margin: 0 0 10px 0;">Job Hunter</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">Contact obtenu</p>
+                        <div style="background: #e9ecef; padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+500 points</div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #95c11f 0%, #2897d5 100%); color: white; padding: 20px; border-radius: 15px; text-align: center; position: relative;">
+                        <div style="position: absolute; top: -10px; right: -10px; background: #ffd700; color: #171718; padding: 5px; border-radius: 50%; font-size: 0.8rem; font-weight: 700;">✓</div>
+                        <div style="font-size: 3rem; margin-bottom: 10px;">🌱</div>
+                        <h4 style="margin: 0 0 10px 0;">Eco Warrior</h4>
+                        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">5000 pas complétés</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600;">+150 points</div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; margin-top: 10px;">
+                            <div style="font-size: 0.9rem; margin-bottom: 5px;">Progression : 5247 / 5000 pas</div>
+                            <div style="background: rgba(255,255,255,0.3); border-radius: 10px; height: 8px;">
+                                <div style="background: white; height: 100%; border-radius: 10px; width: 100%; transition: width 0.5s ease;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #a3195b 0%, #8a1449 100%); color: white; border-radius: 15px; padding: 25px; margin-bottom: 30px;">
+                <h3 style="text-align: center; margin-bottom: 20px;">🎁 Tes Récompenses</h3>
+                
+                <div style="display: flex; justify-content: center;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; text-align: center; max-width: 400px;">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">📊</div>
+                        <h4 style="margin: 0 0 15px 0; font-size: 1.3rem;">Mon Bilan Personnalisé</h4>
+                        <p style="margin: 0 0 20px 0; font-size: 1rem; opacity: 0.9;">Récapitulatif complet de ton parcours au forum emploi</p>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button onclick="downloadBilan()" style="background: white; color: #a3195b; border: none; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 1rem;">
+                                📄 Télécharger en PDF
+                            </button>
+                            <button onclick="emailBilan()" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 1rem;">
+                                📧 Envoyer par Email
+                            </button>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-top: 20px; font-size: 0.9rem;">
+                            <strong>Contient :</strong><br>
+                            • Ton score et badges obtenus<br>
+                            • Liste des entreprises visitées<br>
+                            • Tes contacts et opportunités<br>
+                            • Recommandations personnalisées
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: white; border: 2px solid #171718; border-radius: 15px; padding: 25px;">
+                <h3 style="color: #2897d5; text-align: center; margin-bottom: 25px;">🚀 Prochaines Étapes</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; border-left: 4px solid #f39200;">
+                        <h4 style="margin: 0 0 10px 0; color: #f39200;">Cette Semaine</h4>
+                        <ul style="margin: 0; padding-left: 20px; color: #171718;">
+                            <li>Recontacter les entreprises visitées</li>
+                            <li>Envoyer des emails de remerciement</li>
+                            <li>Préparer les entretiens éventuels</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; border-left: 4px solid #95c11f;">
+                        <h4 style="margin: 0 0 10px 0; color: #95c11f;">Semaine Prochaine</h4>
+                        <ul style="margin: 0; padding-left: 20px; color: #171718;">
+                            <li>RDV bilan avec ton conseiller</li>
+                            <li>Relancer les candidatures</li>
+                            <li>Rechercher d'autres opportunités</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; border-left: 4px solid #2897d5;">
+                        <h4 style="margin: 0 0 10px 0; color: #2897d5;">Ce Mois-ci</h4>
+                        <ul style="margin: 0; padding-left: 20px; color: #171718;">
+                            <li>Candidatures ciblées</li>
+                            <li>Entretiens et immersions</li>
+                            <li>Suivi des réponses</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #f39200 0%, #95c11f 100%); color: white; padding: 20px; border-radius: 15px; margin-top: 25px; text-align: center;">
+                    <h4 style="margin: 0 0 15px 0;">🎉 Félicitations !</h4>
+                    <p style="margin: 0 0 20px 0; font-size: 1.1rem;">Tu as terminé ton parcours au forum emploi. Continue sur cette lancée et n'hésite pas à revenir vers nous si tu as besoin d'aide !</p>
+                    <button onclick="saveResults()" style="background: white; color: #f39200; border: none; padding: 15px 30px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 1.1rem; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+                        💾 Sauvegarder Mon Résultat
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal pour les détails -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h3 id="modalTitle">Titre</h3>
+                <div id="modalContent">Contenu</div>
+                <button class="btn-primary" onclick="closeModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Système de traduction
+        let currentLanguage = 'fr';
+        
+        const translations = {
+            fr: {
+                title: "GAME OF JOBS",
+                subtitle1: "🇫🇷 Trouve ton job",
+                subtitle2: "🇪🇸 ¡Encuentra tu trabajo!",
+                subtitle3: "🇪🇺 Aurkitu zure lana !",
+                forum_title: "Forum de l'Emploi - Réseau des Missions Locales",
+                nav_map: "🗺️ Carte Interactive",
+                nav_rules: "📋 Règles du Jeu",
+                nav_progress: "📊 Mon Parcours",
+                nav_questions: "❓ Questions Fréquentes",
+                nav_rewards: "🏆 Récompenses",
+                main_title: "🗺️ Ta mission commence ici !",
+                main_subtitle: "Explore le Forum de l'Emploi et découvre toutes les opportunités qui t'attendent",
+                total_score: "Score Total",
+                general_progress: "Progression générale",
+                qg_title: "STAND MISSION LOCALE",
+                qg_subtitle: "(QG)",
+                chat_bubble: "💬 On est là si tu as des questions !",
+                objectives_title: "🏆 Tes Objectifs Points",
+                presence_obj: "Feuille de présence signée",
+                sectors_obj: "3 secteurs ciblés",
+                debrief_obj: "Débrief retour QG",
+                partner_obj: "Visite partenaire ML",
+                todo_status: "À faire",
+                completed_status: "Complété !",
+                btn_cv: "📄 Mon CV",
+                btn_help: "💬 Aide / Chat QG",
+                btn_new_sector: "➕ Nouveau Secteur",
+                companies_count: "entreprises"
+            },
+            es: {
+                title: "GAME OF JOBS",
+                subtitle1: "🇫🇷 Encuentra tu trabajo",
+                subtitle2: "🇪🇸 ¡Encuentra tu trabajo!",
+                subtitle3: "🇪🇺 Aurkitu zure lana !",
+                forum_title: "Foro de Empleo - Red de Misiones Locales",
+                nav_map: "🗺️ Mapa Interactivo",
+                nav_rules: "📋 Reglas del Juego",
+                nav_progress: "📊 Mi Progreso",
+                nav_questions: "❓ Preguntas Frecuentes",
+                nav_rewards: "🏆 Recompensas",
+                main_title: "🗺️ ¡Tu misión comienza aquí!",
+                main_subtitle: "Explora el Foro de Empleo y descubre todas las oportunidades que te esperan",
+                total_score: "Puntuación Total",
+                general_progress: "Progreso general",
+                qg_title: "STAND MISIÓN LOCAL",
+                qg_subtitle: "(QG)",
+                chat_bubble: "💬 ¡Estamos aquí si tienes preguntas!",
+                objectives_title: "🏆 Tus Objetivos Puntos",
+                presence_obj: "Hoja de presencia firmada",
+                sectors_obj: "3 sectores objetivo",
+                debrief_obj: "Informe de vuelta al QG",
+                partner_obj: "Visita socio ML",
+                todo_status: "Por hacer",
+                completed_status: "¡Completado!",
+                btn_cv: "📄 Mi CV",
+                btn_help: "💬 Ayuda / Chat QG",
+                btn_new_sector: "➕ Nuevo Sector",
+                companies_count: "empresas",
+                // Page Règles
+                rules_title: "📋 Reglas del Juego",
+                main_objective: "🎯 Objetivo Principal",
+                main_objective_text: "¡Explora el foro, conoce reclutadores, haz preguntas y consigue el trabajo de tus sueños!",
+                how_to_play: "🎮 Cómo Jugar",
+                how_to_play_1: "1. Haz clic en los sectores para explorarlos",
+                how_to_play_2: "2. Conoce a los reclutadores y haz preguntas",
+                how_to_play_3: "3. Deposita tu CV en las empresas",
+                how_to_play_4: "4. Acumula puntos y desbloquea insignias",
+                points_system: "⭐ Sistema de Puntos",
+                visit_sector: "Visita de un sector",
+                question_asked: "Pregunta realizada",
+                cv_deposited: "CV depositado",
+                contact_obtained: "Contacto obtenido",
+                badges_unlock: "🏆 Insignias a Desbloquear",
+                explorer_badge: "🧭 Explorador",
+                explorer_desc: "Visita 3 sectores diferentes",
+                communicator_badge: "💬 Comunicador",
+                communicator_desc: "Haz 5 preguntas a los reclutadores",
+                candidate_badge: "📄 Candidato Pro",
+                candidate_desc: "Deposita tu CV en 3 empresas",
+                hunter_badge: "🌟 Job Hunter",
+                hunter_desc: "Obtén un contacto o entrevista",
+                eco_badge: "🌱 Eco Warrior",
+                eco_desc: "Completa 5000 pasos durante el foro",
+                // Page Parcours
+                progress_title: "📊 Mi Progreso",
+                current_score: "🎯 Tu Puntuación Actual",
+                points_obtained: "puntos obtenidos",
+                general_progression: "Progresión General",
+                objective_reached: "de tu objetivo alcanzado",
+                sectors_visited: "Sectores Visitados",
+                available_sectors: "disponibles",
+                questions_asked: "Preguntas Realizadas",
+                interactions_made: "interacciones realizadas",
+                cvs_deposited: "CVs Depositados",
+                active_applications: "candidaturas activas",
+                badges_obtained: "Insignias Obtenidas",
+                possible_badges: "posibles",
+                your_badges: "🏆 Tus Insignias",
+                obtained_status: "✅ Obtenida",
+                locked_status: "🔒 Bloqueada",
+                real_time_stats: "📊 Mis Estadísticas en Tiempo Real",
+                presentations: "Presentaciones",
+                questions: "Preguntas",
+                followups: "Seguimientos",
+                logbook: "📋 Mi Cuaderno de Bitácora",
+                add_company: "➕ Agregar una empresa",
+                clear_all: "🗑️ Borrar todo",
+                back_to_qg: "⬅️ Volver al QG",
+                empty_logbook: "Tu cuaderno de bitácora está vacío",
+                empty_logbook_desc: "¡Comienza a agregar las empresas que encuentres para seguir tus gestiones!",
+                add_first_company: "➕ Agregar mi primera empresa",
+                next_objectives: "🎯 Próximos Objetivos",
+                ask_more_questions: "Haz 3 preguntas más",
+                unlock_communicator: "Para desbloquear la insignia Comunicador",
+                deposit_more_cvs: "Deposita 2 CVs más",
+                unlock_candidate: "Para desbloquear la insignia Candidato Pro",
+                // Page Questions
+                questions_title: "❓ Preguntas para Hacer a los Reclutadores",
+                break_ice: "💡 ¡Rompe el Hielo!",
+                break_ice_desc: "¡Estas preguntas te ayudan a romper el hielo con un reclutador!",
+                click_copy: "Haz clic en una pregunta para copiarla y usarla 📋",
+                personal_questions: "✏️ Mis Preguntas Personales",
+                personal_questions_desc: "Anota aquí tus propias preguntas según tu perfil e intereses:",
+                add_question: "➕ Agregar",
+                faq_forum: "💡 Preguntas Frecuentes sobre el Foro",
+                more_questions: "💬 ¿Más Preguntas?",
+                contact_advisors: "¡No dudes en contactar a tus consejeros de Misión Local!",
+                // Page Récompenses
+                rewards_title: "🏆 Recompensas",
+                final_score: "🎯 Tu Puntuación Final",
+                your_ranking: "🏅 Tu Clasificación",
+                participants: "participantes",
+                top_percent: "¡Estás en el top 25%! 🎉",
+                obtained_badges: "🏅 Tus Insignias Obtenidas",
+                your_rewards: "🎁 Tus Recompensas",
+                personalized_report: "Mi Informe Personalizado",
+                report_desc: "Resumen completo de tu recorrido en el foro de empleo",
+                download_pdf: "📄 Descargar en PDF",
+                send_email: "📧 Enviar por Email",
+                report_contains: "Contiene:",
+                report_content_1: "• Tu puntuación e insignias obtenidas",
+                report_content_2: "• Lista de empresas visitadas",
+                report_content_3: "• Tus contactos y oportunidades",
+                report_content_4: "• Recomendaciones personalizadas",
+                next_steps: "🚀 Próximos Pasos",
+                this_week: "Esta Semana",
+                next_week: "Próxima Semana",
+                this_month: "Este Mes",
+                congratulations: "🎉 ¡Felicitaciones!",
+                congratulations_text: "Has terminado tu recorrido en el foro de empleo. ¡Continúa con este impulso y no dudes en volver a nosotros si necesitas ayuda!",
+                save_result: "💾 Guardar Mi Resultado"
+            }
+        };
+
+        let currentScore = 140;
+        let visitedSectors = [];
+        let completedObjectives = [];
+        let companies = {
+            commerce: [
+                { name: "SuperMarché Plus", contact: "Marie Dubois", phone: "01.23.45.67.89", email: "marie@supermarche.fr", offers: ["Vendeur H/F", "Caissier H/F"] },
+                { name: "Boutique Mode", contact: "Jean Martin", phone: "01.98.76.54.32", email: "jean@mode.fr", offers: ["Conseiller de vente", "Responsable boutique"] }
+            ],
+            industrie: [
+                { name: "TechnoFab", contact: "Sophie Laurent", phone: "01.11.22.33.44", email: "sophie@technofab.fr", offers: ["Opérateur machine", "Technicien maintenance"] }
+            ],
+            numerique: [
+                { name: "WebDev Pro", contact: "Alex Dupont", phone: "01.55.66.77.88", email: "alex@webdev.fr", offers: ["Développeur Junior", "Designer UI/UX"] }
+            ],
+            sante: [
+                { name: "Clinique Santé+", contact: "Dr. Martin", phone: "01.44.55.66.77", email: "contact@sante.fr", offers: ["Aide-soignant", "Secrétaire médical"] }
+            ]
+        };
+
+        let customSectors = [];
+        let sectorColors = ['#f39200', '#95c11f', '#2897d5', '#a3195b', '#d60b52', '#9f3d3f'];
+        let sectorIcons = ['🏢', '⚡', '🎯', '🔧', '📊', '🌟', '💼', '🚀', '⭐', '🎨'];
+        
+        // Données du carnet de bord
+        let companyTracker = [];
+
+        // Navigation entre les pages
+        function showPage(pageId) {
+            // Masquer toutes les pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Masquer tous les boutons de navigation actifs
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Afficher la page sélectionnée
+            document.getElementById(pageId).classList.add('active');
+            
+            // Activer le bouton correspondant
+            event.target.classList.add('active');
+        }
+
+        // Ouvrir les détails d'un secteur
+        function openSector(sectorName) {
+            const sectorCompanies = companies[sectorName] || [];
+            
+            let content = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="color: #f39200; margin: 0;">🏢 Secteur ${sectorName.charAt(0).toUpperCase() + sectorName.slice(1)}</h3>
+                    <button onclick="addCompanyToSector('${sectorName}')" style="background: #95c11f; color: white; border: none; padding: 8px 15px; border-radius: 15px; cursor: pointer; font-weight: 600;">
+                        ➕ Ajouter Entreprise
+                    </button>
+                </div>
+                <p style="margin-bottom: 20px;">Découvre les entreprises et opportunités dans ce secteur !</p>
+            `;
+            
+            if (sectorCompanies.length > 0) {
+                content += '<div style="display: flex; flex-direction: column; gap: 15px;">';
+                sectorCompanies.forEach((company, index) => {
+                    content += `
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #f39200; position: relative;">
+                            <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 5px;">
+                                <button onclick="editCompany('${sectorName}', ${index})" style="background: #2897d5; color: white; border: none; padding: 5px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">✏️</button>
+                                <button onclick="deleteCompany('${sectorName}', ${index})" style="background: #d60b52; color: white; border: none; padding: 5px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">🗑️</button>
+                            </div>
+                            <h4 style="margin: 0 0 10px 0; color: #171718; padding-right: 80px;">${company.name}</h4>
+                            <p style="margin: 5px 0; color: #6c757d;"><strong>Contact :</strong> ${company.contact}</p>
+                            <p style="margin: 5px 0; color: #6c757d;"><strong>Téléphone :</strong> ${company.phone}</p>
+                            <p style="margin: 5px 0; color: #6c757d;"><strong>Email :</strong> ${company.email}</p>
+                            ${company.offers && company.offers.length > 0 ? `
+                                <div style="margin: 10px 0;">
+                                    <strong style="color: #171718;">Offres disponibles :</strong>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px;">
+                                        ${company.offers.map(offer => `
+                                            <span style="background: #e9ecef; color: #171718; padding: 3px 8px; border-radius: 10px; font-size: 0.8rem;">${offer}</span>
+                                        `).join('')}
+                                    </div>
+                                    <button onclick="manageOffers('${sectorName}', ${index})" style="background: #a3195b; color: white; border: none; padding: 5px 10px; border-radius: 10px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">
+                                        Gérer les offres
+                                    </button>
+                                </div>
+                            ` : `
+                                <button onclick="manageOffers('${sectorName}', ${index})" style="background: #a3195b; color: white; border: none; padding: 5px 10px; border-radius: 10px; cursor: pointer; font-size: 0.8rem; margin-top: 10px;">
+                                    ➕ Ajouter des offres
+                                </button>
+                            `}
+                            <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                                <button onclick="visitCompany('${company.name}')" style="background: #95c11f; color: white; border: none; padding: 8px 15px; border-radius: 15px; cursor: pointer; font-weight: 600;">
+                                    Visiter cette entreprise (+20 pts)
+                                </button>
+                                <button onclick="manageOffers('${sectorName}', ${index})" style="background: #f39200; color: white; border: none; padding: 8px 15px; border-radius: 15px; cursor: pointer; font-weight: 600;">
+                                    ➕ Offres à pourvoir
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                content += '</div>';
+            } else {
+                content += `
+                    <div style="text-align: center; padding: 30px; background: #f8f9fa; border-radius: 10px; margin: 20px 0;">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">🏗️</div>
+                        <p style="color: #6c757d; margin: 0;">Aucune entreprise dans ce secteur pour le moment.</p>
+                        <p style="color: #6c757d; margin: 5px 0 0 0;">Clique sur "Ajouter Entreprise" pour commencer !</p>
+                    </div>
+                `;
+            }
+            
+            // Ajouter le secteur aux secteurs visités
+            if (!visitedSectors.includes(sectorName)) {
+                visitedSectors.push(sectorName);
+                addScore(20);
+            }
+            
+            openModal('Secteur ' + sectorName.charAt(0).toUpperCase() + sectorName.slice(1), content);
+        }
+
+        // Visiter une entreprise
+        function visitCompany(companyName) {
+            addScore(20);
+            showNotification(`✅ Entreprise ${companyName} visitée ! +20 points`);
+            closeModal();
+        }
+
+        // Ouvrir le QG Mission Locale
+        function openQG() {
+            const content = `
+                <h3 style="color: #2897d5; margin-bottom: 20px;">🏠 QG Mission Locale</h3>
+                <p style="margin-bottom: 20px;">Bienvenue au stand de la Mission Locale ! Nous sommes là pour t'accompagner.</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: #f39200; margin: 0 0 15px 0;">📋 Tes objectifs du jour :</h4>
+                    <ul style="margin: 0; padding-left: 20px; color: #171718;">
+                        <li>Signer la feuille de présence ✅</li>
+                        <li>Explorer au moins 3 secteurs (${visitedSectors.length}/3)</li>
+                        <li>Poser des questions aux recruteurs</li>
+                        <li>Déposer ton CV dans une entreprise</li>
+                        <li>Revenir ici pour le débrief final</li>
+                    </ul>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #95c11f 0%, #2897d5 100%); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p style="margin: 0; font-weight: 600;">💬 Besoin d'aide ? N'hésite pas à nous poser tes questions !</p>
+                </div>
+            `;
+            
+            openModal('QG Mission Locale', content);
+        }
+
+        // Options CV
+        function openCVOptions() {
+            const content = `
+                <h3 style="color: #f39200; margin-bottom: 20px;">📄 Mon CV</h3>
+                <p style="margin-bottom: 20px;">Choisis comment tu veux partager ton CV avec les recruteurs :</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <button onclick="downloadCV()" style="background: #2897d5; color: white; border: none; padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        ⬇️ Télécharger mon CV (PDF)
+                    </button>
+                    
+                    <button onclick="emailCV()" style="background: #95c11f; color: white; border: none; padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        📧 Envoyer mon CV par email
+                    </button>
+                    
+                    <button onclick="shareCV()" style="background: #f39200; color: white; border: none; padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        🔗 Partager le lien de mon CV
+                    </button>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <p style="margin: 0; font-size: 0.9rem; color: #6c757d; text-align: center;">
+                        💡 Conseil : Dépose ton CV dans les entreprises qui t'intéressent pour gagner +100 points !
+                    </p>
+                </div>
+            `;
+            
+            openModal('Mon CV', content);
+        }
+
+        // Chat avec les conseillers
+        function openChat() {
+            showPage('questions');
+        }
+
+        // Compléter un objectif
+        function completeObjective(objectiveType) {
+            if (completedObjectives.includes(objectiveType)) return;
+            
+            completedObjectives.push(objectiveType);
+            const objectiveCard = event.target.closest('.objective-card');
+            objectiveCard.classList.add('completed');
+            
+            const statusElement = objectiveCard.querySelector('.objective-status');
+            statusElement.textContent = 'Complété !';
+            
+            let points = 0;
+            switch(objectiveType) {
+                case 'presence': points = 10; break;
+                case 'secteurs': points = 10; break;
+                case 'debrief': points = 20; break;
+                case 'partenaire': points = 100; break;
+            }
+            
+            addScore(points);
+            showNotification(`🎉 Objectif complété ! +${points} points`);
+        }
+
+        // Ajouter des points
+        function addScore(points) {
+            currentScore += points;
+            document.getElementById('totalScore').textContent = currentScore;
+            if (document.getElementById('finalScore')) {
+                document.getElementById('finalScore').textContent = currentScore;
+            }
+            if (document.getElementById('currentScore')) {
+                document.getElementById('currentScore').textContent = currentScore;
+            }
+            
+            // Mettre à jour la progression
+            const progress = Math.min((currentScore / 1000) * 100, 100);
+            document.getElementById('globalProgress').style.width = progress + '%';
+        }
+
+        // Afficher une notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #95c11f 0%, #2897d5 100%);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 2000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Gestion du modal
+        function openModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Fonctions pour les questions fréquentes
+        function toggleAnswer(questionId) {
+            const answer = document.getElementById(questionId);
+            const icon = event.target.closest('.question-card').querySelector('div:last-child');
+            
+            if (answer.style.display === 'none' || answer.style.display === '') {
+                answer.style.display = 'block';
+                icon.textContent = '−';
+            } else {
+                answer.style.display = 'none';
+                icon.textContent = '+';
+            }
+        }
+
+        // Fonctions pour les cartes de questions colorées
+        let personalQuestions = [];
+
+        function copyQuestion(question) {
+            // Simuler la copie dans le presse-papier
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(question).then(() => {
+                    showNotification(`📋 Question copiée : "${question}"`);
+                }).catch(() => {
+                    showNotification(`💡 Question sélectionnée : "${question}"`);
+                });
+            } else {
+                showNotification(`💡 Question sélectionnée : "${question}"`);
+            }
+            
+            // Effet visuel sur la carte
+            event.target.closest('.question-card-colorful').style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                event.target.closest('.question-card-colorful').style.transform = 'scale(1)';
+            }, 150);
+        }
+
+        function addPersonalQuestion() {
+            const input = document.getElementById('newPersonalQuestion');
+            const question = input.value.trim();
+            
+            if (!question) {
+                showNotification('❌ Écris d\'abord ta question !');
+                return;
+            }
+            
+            personalQuestions.push({
+                id: Date.now(),
+                text: question
+            });
+            
+            input.value = '';
+            updatePersonalQuestionsDisplay();
+            showNotification('✅ Question personnelle ajoutée !');
+        }
+
+        function updatePersonalQuestionsDisplay() {
+            const container = document.getElementById('personalQuestions');
+            
+            if (personalQuestions.length === 0) {
+                container.innerHTML = '<p style="color: #6c757d; font-style: italic; margin: 0;">Aucune question personnelle pour le moment.</p>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            personalQuestions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.style.cssText = `
+                    background: #f8f9fa;
+                    padding: 12px 15px;
+                    border-radius: 10px;
+                    border-left: 4px solid #f39200;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 15px;
+                `;
+                
+                questionDiv.innerHTML = `
+                    <span style="color: #171718; flex: 1;">${question.text}</span>
+                    <div style="display: flex; gap: 8px;">
+                        <button onclick="copyQuestion('${question.text.replace(/'/g, '\\\'')}')" style="background: #2897d5; color: white; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">
+                            📋 Copier
+                        </button>
+                        <button onclick="removePersonalQuestion(${question.id})" style="background: #d60b52; color: white; border: none; padding: 6px 8px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">
+                            🗑️
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function removePersonalQuestion(questionId) {
+            personalQuestions = personalQuestions.filter(q => q.id !== questionId);
+            updatePersonalQuestionsDisplay();
+            showNotification('🗑️ Question supprimée !');
+        }
+
+        // Gestion de l'entrée avec la touche Entrée
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('newPersonalQuestion');
+            if (input) {
+                input.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        addPersonalQuestion();
+                    }
+                });
+            }
+        });
+
+        // Fonctions pour les récompenses
+        function downloadBilan() {
+            showNotification('📊 Bilan personnalisé téléchargé en PDF !');
+        }
+
+        function emailBilan() {
+            const content = `
+                <h3 style="color: #2897d5; margin-bottom: 20px;">📧 Envoyer le Bilan par Email</h3>
+                <form onsubmit="sendBilanEmail(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="emailAddress" style="display: block; margin-bottom: 5px; font-weight: 600;">Adresse email :</label>
+                        <input type="email" id="emailAddress" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="ton.email@exemple.fr">
+                    </div>
+                    <div>
+                        <label for="emailMessage" style="display: block; margin-bottom: 5px; font-weight: 600;">Message personnalisé (optionnel) :</label>
+                        <textarea id="emailMessage" rows="3" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; resize: vertical;" placeholder="Ajoute un message personnel..."></textarea>
+                    </div>
+                    <button type="submit" style="background: #2897d5; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        📧 Envoyer le Bilan
+                    </button>
+                </form>
+            `;
+            openModal('Envoyer par Email', content);
+        }
+
+        function sendBilanEmail(event) {
+            event.preventDefault();
+            const email = document.getElementById('emailAddress').value;
+            closeModal();
+            showNotification(`📧 Bilan envoyé à ${email} !`);
+        }
+
+        // Fonctions CV
+        function downloadCV() {
+            showNotification('📄 CV téléchargé !');
+            closeModal();
+        }
+
+        function emailCV() {
+            showNotification('📧 CV envoyé par email !');
+            closeModal();
+        }
+
+        function shareCV() {
+            showNotification('🔗 Lien du CV copié !');
+            closeModal();
+        }
+
+        // Sauvegarder les résultats
+        function saveResults() {
+            const content = `
+                <h3 style="color: #f39200; margin-bottom: 20px;">💾 Sauvegarder Mon Résultat</h3>
+                <p style="margin-bottom: 20px;">Choisis comment tu veux sauvegarder ton parcours au forum emploi :</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <button onclick="downloadResults()" style="background: #2897d5; color: white; border: none; padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 10px; justify-content: center;">
+                        <span style="font-size: 1.2rem;">📊</span>
+                        Télécharger le Rapport Complet (PDF)
+                    </button>
+                    
+                    <button onclick="exportToExcel()" style="background: #95c11f; color: white; border: none; padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 10px; justify-content: center;">
+                        <span style="font-size: 1.2rem;">📋</span>
+                        Exporter le Carnet de Bord (Excel)
+                    </button>
+                    
+                    <button onclick="shareResults()" style="background: #a3195b; color: white; border: none; padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 10px; justify-content: center;">
+                        <span style="font-size: 1.2rem;">🔗</span>
+                        Partager Mes Résultats
+                    </button>
+                    
+                    <button onclick="emailResults()" style="background: #f39200; color: white; border: none; padding: 15px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 10px; justify-content: center;">
+                        <span style="font-size: 1.2rem;">📧</span>
+                        Envoyer par Email
+                    </button>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: #171718; margin: 0 0 10px 0;">📋 Contenu sauvegardé :</h4>
+                    <ul style="margin: 0; padding-left: 20px; color: #6c757d; font-size: 0.9rem;">
+                        <li>Score final : ${currentScore} points</li>
+                        <li>Badges obtenus : ${completedObjectives.length}/4</li>
+                        <li>Secteurs visités : ${visitedSectors.length}</li>
+                        <li>Entreprises contactées : ${companyTracker.length}</li>
+                        <li>Carnet de bord complet</li>
+                        <li>Recommandations personnalisées</li>
+                    </ul>
+                </div>
+            `;
+            openModal('Sauvegarder Résultats', content);
+        }
+
+        function downloadResults() {
+            showNotification('📊 Rapport complet téléchargé en PDF !');
+            closeModal();
+        }
+
+        function exportToExcel() {
+            showNotification('📋 Carnet de bord exporté en Excel !');
+            closeModal();
+        }
+
+        function shareResults() {
+            showNotification('🔗 Lien de partage copié dans le presse-papier !');
+            closeModal();
+        }
+
+        function emailResults() {
+            const content = `
+                <h3 style="color: #f39200; margin-bottom: 20px;">📧 Envoyer Mes Résultats</h3>
+                <form onsubmit="sendResultsEmail(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="resultsEmail" style="display: block; margin-bottom: 5px; font-weight: 600;">Adresse email :</label>
+                        <input type="email" id="resultsEmail" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="ton.email@exemple.fr">
+                    </div>
+                    <div>
+                        <label for="resultsMessage" style="display: block; margin-bottom: 5px; font-weight: 600;">Message personnalisé (optionnel) :</label>
+                        <textarea id="resultsMessage" rows="3" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; resize: vertical;" placeholder="Ajoute un message pour accompagner tes résultats..."></textarea>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="includeTracker" checked style="width: 18px; height: 18px;">
+                            <span style="font-size: 0.9rem;">Inclure le carnet de bord</span>
+                        </label>
+                    </div>
+                    <button type="submit" style="background: #f39200; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        📧 Envoyer Mes Résultats
+                    </button>
+                </form>
+            `;
+            openModal('Envoyer Résultats', content);
+        }
+
+        function sendResultsEmail(event) {
+            event.preventDefault();
+            const email = document.getElementById('resultsEmail').value;
+            const includeTracker = document.getElementById('includeTracker').checked;
+            closeModal();
+            showNotification(`📧 Résultats envoyés à ${email} ${includeTracker ? 'avec' : 'sans'} le carnet de bord !`);
+        }
+
+        // Ajouter un nouveau secteur
+        function addNewSector() {
+            const content = `
+                <h3 style="color: #a3195b; margin-bottom: 20px;">➕ Créer un Nouveau Secteur</h3>
+                <form onsubmit="createSector(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="sectorName" style="display: block; margin-bottom: 5px; font-weight: 600;">Nom du secteur :</label>
+                        <input type="text" id="sectorName" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: Tourisme, Artisanat...">
+                    </div>
+                    <div>
+                        <label for="sectorIcon" style="display: block; margin-bottom: 5px; font-weight: 600;">Icône du secteur :</label>
+                        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 10px 0;">
+                            ${sectorIcons.map(icon => `
+                                <button type="button" onclick="selectIcon('${icon}')" style="padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; background: white; cursor: pointer; font-size: 1.5rem;" data-icon="${icon}">
+                                    ${icon}
+                                </button>
+                            `).join('')}
+                        </div>
+                        <input type="hidden" id="selectedIcon" value="🏢">
+                    </div>
+                    <div>
+                        <label for="sectorColor" style="display: block; margin-bottom: 5px; font-weight: 600;">Couleur du secteur :</label>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0;">
+                            ${sectorColors.map(color => `
+                                <button type="button" onclick="selectColor('${color}')" style="padding: 15px; border: 2px solid #e9ecef; border-radius: 8px; background: ${color}; cursor: pointer;" data-color="${color}">
+                                </button>
+                            `).join('')}
+                        </div>
+                        <input type="hidden" id="selectedColor" value="${sectorColors[0]}">
+                    </div>
+                    <button type="submit" style="background: #95c11f; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        Créer le Secteur
+                    </button>
+                </form>
+            `;
+            openModal('Nouveau Secteur', content);
+        }
+
+        // Sélectionner une icône
+        function selectIcon(icon) {
+            document.querySelectorAll('[data-icon]').forEach(btn => {
+                btn.style.border = '2px solid #e9ecef';
+            });
+            event.target.style.border = '2px solid #f39200';
+            document.getElementById('selectedIcon').value = icon;
+        }
+
+        // Sélectionner une couleur
+        function selectColor(color) {
+            document.querySelectorAll('[data-color]').forEach(btn => {
+                btn.style.border = '2px solid #e9ecef';
+            });
+            event.target.style.border = '2px solid #171718';
+            document.getElementById('selectedColor').value = color;
+        }
+
+        // Créer un nouveau secteur
+        function createSector(event) {
+            event.preventDefault();
+            const name = document.getElementById('sectorName').value.toLowerCase().trim();
+            const icon = document.getElementById('selectedIcon').value;
+            const color = document.getElementById('selectedColor').value;
+            
+            if (!name) return;
+            
+            // Vérifier si le secteur existe déjà
+            if (companies[name]) {
+                showNotification('❌ Ce secteur existe déjà !');
+                return;
+            }
+            
+            // Créer le secteur
+            companies[name] = [];
+            customSectors.push({ name, icon, color });
+            
+            // Ajouter le secteur au plateau
+            addSectorToBoard(name, icon, color);
+            
+            closeModal();
+            showNotification(`✅ Secteur "${name}" créé avec succès !`);
+        }
+
+        // Ajouter un secteur au plateau
+        function addSectorToBoard(name, icon, color) {
+            const board = document.querySelector('#map .page > div:last-child');
+            const newSector = document.createElement('div');
+            
+            // Position aléatoire pour le nouveau secteur
+            const positions = [
+                { top: '30%', left: '15%' },
+                { top: '30%', right: '15%' },
+                { bottom: '40%', left: '15%' },
+                { bottom: '40%', right: '15%' },
+                { top: '60%', left: '30%' },
+                { top: '60%', right: '30%' }
+            ];
+            const position = positions[customSectors.length % positions.length];
+            
+            newSector.className = 'game-sector';
+            newSector.setAttribute('data-sector', name);
+            newSector.style.cssText = `
+                position: absolute; 
+                ${position.top ? `top: ${position.top};` : `bottom: ${position.bottom};`}
+                ${position.left ? `left: ${position.left};` : `right: ${position.right};`}
+                background: ${color}; 
+                border: 3px solid #171718;
+                width: 120px;
+                height: 120px;
+                border-radius: 15px;
+                color: white;
+                text-align: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            `;
+            
+            newSector.innerHTML = `
+                <div class="sector-icon" style="font-size: 2rem; margin-bottom: 5px;">${icon}</div>
+                <h4 style="margin: 0; font-size: 0.9rem; font-weight: 600;">${name.charAt(0).toUpperCase() + name.slice(1)}</h4>
+                <div class="sector-controls" style="position: absolute; top: -10px; right: -10px; display: flex; gap: 5px;">
+                    <button onclick="event.stopPropagation(); addCompanyToSector('${name}')" title="Ajouter entreprise" style="width: 25px; height: 25px; border-radius: 50%; border: 2px solid #171718; background: white; color: #171718; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">➕</button>
+                    <button onclick="event.stopPropagation(); removeSector('${name}')" title="Supprimer secteur" style="width: 25px; height: 25px; border-radius: 50%; border: 2px solid #171718; background: white; color: #171718; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">❌</button>
+                </div>
+            `;
+            
+            newSector.onclick = () => openSector(name);
+            board.appendChild(newSector);
+        }
+
+        // Ajouter une entreprise à un secteur
+        function addCompanyToSector(sectorName) {
+            const content = `
+                <h3 style="color: #95c11f; margin-bottom: 20px;">➕ Ajouter une Entreprise</h3>
+                <p style="margin-bottom: 20px;">Secteur : <strong>${sectorName.charAt(0).toUpperCase() + sectorName.slice(1)}</strong></p>
+                <form onsubmit="createCompany(event, '${sectorName}')" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="companyName" style="display: block; margin-bottom: 5px; font-weight: 600;">Nom de l'entreprise :</label>
+                        <input type="text" id="companyName" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: TechCorp, Restaurant Chez Paul...">
+                    </div>
+                    <div>
+                        <label for="companyContact" style="display: block; margin-bottom: 5px; font-weight: 600;">Nom du contact :</label>
+                        <input type="text" id="companyContact" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: Marie Dupont">
+                    </div>
+                    <div>
+                        <label for="companyPhone" style="display: block; margin-bottom: 5px; font-weight: 600;">Téléphone :</label>
+                        <input type="tel" id="companyPhone" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: 01.23.45.67.89">
+                    </div>
+                    <div>
+                        <label for="companyEmail" style="display: block; margin-bottom: 5px; font-weight: 600;">Email :</label>
+                        <input type="email" id="companyEmail" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: contact@entreprise.fr">
+                    </div>
+                    <button type="submit" style="background: #95c11f; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        Ajouter l'Entreprise
+                    </button>
+                </form>
+            `;
+            openModal('Nouvelle Entreprise', content);
+        }
+
+        // Créer une nouvelle entreprise
+        function createCompany(event, sectorName) {
+            event.preventDefault();
+            const name = document.getElementById('companyName').value.trim();
+            const contact = document.getElementById('companyContact').value.trim();
+            const phone = document.getElementById('companyPhone').value.trim();
+            const email = document.getElementById('companyEmail').value.trim();
+            
+            if (!name || !contact || !phone || !email) return;
+            
+            // Ajouter l'entreprise au secteur
+            if (!companies[sectorName]) {
+                companies[sectorName] = [];
+            }
+            
+            companies[sectorName].push({
+                name,
+                contact,
+                phone,
+                email,
+                offers: []
+            });
+            
+            closeModal();
+            showNotification(`✅ Entreprise "${name}" ajoutée au secteur ${sectorName} !`);
+        }
+
+        // Modifier une entreprise
+        function editCompany(sectorName, companyIndex) {
+            const company = companies[sectorName][companyIndex];
+            const content = `
+                <h3 style="color: #2897d5; margin-bottom: 20px;">✏️ Modifier l'Entreprise</h3>
+                <form onsubmit="updateCompany(event, '${sectorName}', ${companyIndex})" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="editCompanyName" style="display: block; margin-bottom: 5px; font-weight: 600;">Nom de l'entreprise :</label>
+                        <input type="text" id="editCompanyName" value="${company.name}" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div>
+                        <label for="editCompanyContact" style="display: block; margin-bottom: 5px; font-weight: 600;">Nom du contact :</label>
+                        <input type="text" id="editCompanyContact" value="${company.contact}" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div>
+                        <label for="editCompanyPhone" style="display: block; margin-bottom: 5px; font-weight: 600;">Téléphone :</label>
+                        <input type="tel" id="editCompanyPhone" value="${company.phone}" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div>
+                        <label for="editCompanyEmail" style="display: block; margin-bottom: 5px; font-weight: 600;">Email :</label>
+                        <input type="email" id="editCompanyEmail" value="${company.email}" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <button type="submit" style="background: #2897d5; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        Sauvegarder les Modifications
+                    </button>
+                </form>
+            `;
+            openModal('Modifier Entreprise', content);
+        }
+
+        // Mettre à jour une entreprise
+        function updateCompany(event, sectorName, companyIndex) {
+            event.preventDefault();
+            const name = document.getElementById('editCompanyName').value.trim();
+            const contact = document.getElementById('editCompanyContact').value.trim();
+            const phone = document.getElementById('editCompanyPhone').value.trim();
+            const email = document.getElementById('editCompanyEmail').value.trim();
+            
+            if (!name || !contact || !phone || !email) return;
+            
+            // Mettre à jour l'entreprise
+            companies[sectorName][companyIndex] = {
+                ...companies[sectorName][companyIndex],
+                name,
+                contact,
+                phone,
+                email
+            };
+            
+            closeModal();
+            showNotification(`✅ Entreprise "${name}" mise à jour !`);
+        }
+
+        // Supprimer une entreprise
+        function deleteCompany(sectorName, companyIndex) {
+            const company = companies[sectorName][companyIndex];
+            const content = `
+                <h3 style="color: #d60b52; margin-bottom: 20px;">🗑️ Supprimer l'Entreprise</h3>
+                <p style="margin-bottom: 20px;">Êtes-vous sûr de vouloir supprimer l'entreprise <strong>"${company.name}"</strong> ?</p>
+                <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 20px;">Cette action est irréversible.</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="closeModal()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                        Annuler
+                    </button>
+                    <button onclick="confirmDeleteCompany('${sectorName}', ${companyIndex})" style="background: #d60b52; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                        Supprimer
+                    </button>
+                </div>
+            `;
+            openModal('Confirmer Suppression', content);
+        }
+
+        // Confirmer la suppression d'une entreprise
+        function confirmDeleteCompany(sectorName, companyIndex) {
+            const companyName = companies[sectorName][companyIndex].name;
+            companies[sectorName].splice(companyIndex, 1);
+            closeModal();
+            showNotification(`🗑️ Entreprise "${companyName}" supprimée !`);
+        }
+
+        // Gérer les offres d'une entreprise
+        function manageOffers(sectorName, companyIndex) {
+            const company = companies[sectorName][companyIndex];
+            const offers = company.offers || [];
+            
+            let content = `
+                <h3 style="color: #a3195b; margin-bottom: 20px;">💼 Gérer les Offres</h3>
+                <p style="margin-bottom: 20px;">Entreprise : <strong>${company.name}</strong></p>
+                
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #171718; margin-bottom: 10px;">Offres actuelles :</h4>
+            `;
+            
+            if (offers.length > 0) {
+                content += '<div style="display: flex; flex-direction: column; gap: 10px;">';
+                offers.forEach((offer, index) => {
+                    content += `
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: #f8f9fa; padding: 10px; border-radius: 8px;">
+                            <span>${offer}</span>
+                            <button onclick="removeOffer('${sectorName}', ${companyIndex}, ${index})" style="background: #d60b52; color: white; border: none; padding: 5px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                                🗑️
+                            </button>
+                        </div>
+                    `;
+                });
+                content += '</div>';
+            } else {
+                content += '<p style="color: #6c757d; font-style: italic;">Aucune offre pour le moment.</p>';
+            }
+            
+            content += `
+                </div>
+                
+                <form onsubmit="addOffer(event, '${sectorName}', ${companyIndex})" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="newOffer" style="display: block; margin-bottom: 5px; font-weight: 600;">Nouvelle offre :</label>
+                        <input type="text" id="newOffer" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: Développeur Junior, Vendeur H/F...">
+                    </div>
+                    <button type="submit" style="background: #95c11f; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        ➕ Ajouter l'Offre
+                    </button>
+                </form>
+            `;
+            
+            openModal('Gérer les Offres', content);
+        }
+
+        // Ajouter une offre
+        function addOffer(event, sectorName, companyIndex) {
+            event.preventDefault();
+            const offerText = document.getElementById('newOffer').value.trim();
+            
+            if (!offerText) return;
+            
+            if (!companies[sectorName][companyIndex].offers) {
+                companies[sectorName][companyIndex].offers = [];
+            }
+            
+            companies[sectorName][companyIndex].offers.push(offerText);
+            
+            // Recharger le modal avec les nouvelles offres
+            manageOffers(sectorName, companyIndex);
+            showNotification(`✅ Offre "${offerText}" ajoutée !`);
+        }
+
+        // Supprimer une offre
+        function removeOffer(sectorName, companyIndex, offerIndex) {
+            const offerText = companies[sectorName][companyIndex].offers[offerIndex];
+            companies[sectorName][companyIndex].offers.splice(offerIndex, 1);
+            
+            // Recharger le modal
+            manageOffers(sectorName, companyIndex);
+            showNotification(`🗑️ Offre "${offerText}" supprimée !`);
+        }
+
+        // Supprimer un secteur
+        function removeSector(sectorName) {
+            const content = `
+                <h3 style="color: #d60b52; margin-bottom: 20px;">🗑️ Supprimer le Secteur</h3>
+                <p style="margin-bottom: 20px;">Êtes-vous sûr de vouloir supprimer le secteur <strong>"${sectorName.charAt(0).toUpperCase() + sectorName.slice(1)}"</strong> ?</p>
+                <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 20px;">Toutes les entreprises de ce secteur seront également supprimées. Cette action est irréversible.</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="closeModal()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                        Annuler
+                    </button>
+                    <button onclick="confirmRemoveSector('${sectorName}')" style="background: #d60b52; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                        Supprimer
+                    </button>
+                </div>
+            `;
+            openModal('Confirmer Suppression', content);
+        }
+
+        // Confirmer la suppression d'un secteur
+        function confirmRemoveSector(sectorName) {
+            // Supprimer les données du secteur
+            delete companies[sectorName];
+            
+            // Supprimer des secteurs personnalisés si c'en est un
+            customSectors = customSectors.filter(sector => sector.name !== sectorName);
+            
+            // Supprimer l'élément du DOM
+            const sectorElement = document.querySelector(`[data-sector="${sectorName}"]`);
+            if (sectorElement) {
+                sectorElement.remove();
+            }
+            
+            closeModal();
+            showNotification(`🗑️ Secteur "${sectorName}" supprimé !`);
+        }
+
+        // Fonction pour les secteurs existants (pour éviter les erreurs)
+        function addCompany(sectorName) {
+            addCompanyToSector(sectorName);
+        }
+
+        // Fonction de changement de langue
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Mettre à jour les boutons de langue
+            document.getElementById('langFr').style.cssText = lang === 'fr' ? 
+                "background: linear-gradient(135deg, #f39200 0%, #d17a00 100%); color: white; border: 2px solid #171718; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(243,146,0,0.3);" :
+                "background: rgba(255,255,255,0.9); color: #171718; border: 2px solid #171718; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);";
+            
+            document.getElementById('langEs').style.cssText = lang === 'es' ? 
+                "background: linear-gradient(135deg, #f39200 0%, #d17a00 100%); color: white; border: 2px solid #171718; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(243,146,0,0.3);" :
+                "background: rgba(255,255,255,0.9); color: #171718; border: 2px solid #171718; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);";
+            
+            // Appliquer les traductions
+            const elementsToTranslate = document.querySelectorAll('[data-translate]');
+            elementsToTranslate.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Traductions spéciales pour les éléments avec HTML
+            if (lang === 'es') {
+                // Mettre à jour le texte de progression
+                const progressText = document.querySelector('[data-translate="general_progress"]');
+                if (progressText) {
+                    progressText.textContent = "Progreso general: 35%";
+                }
+            } else {
+                const progressText = document.querySelector('[data-translate="general_progress"]');
+                if (progressText) {
+                    progressText.textContent = "Progression générale : 35%";
+                }
+            }
+            
+            showNotification(lang === 'es' ? '🇪🇸 Idioma cambiado a español' : '🇫🇷 Langue changée en français');
+        }
+
+        // Gestion des événements clavier
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Fermer le modal en cliquant à l'extérieur
+        document.getElementById('modal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+
+        // Animation du chat bubble
+        setInterval(() => {
+            const bubble = document.getElementById('chatBubble');
+            if (bubble) {
+                bubble.style.transform = 'translateX(-50%) translateY(' + (Math.sin(Date.now() / 1000) * 3) + 'px)';
+            }
+        }, 50);
+
+        // Fonctions du carnet de bord
+        function addCompanyToTracker() {
+            const content = `
+                <h3 style="color: #95c11f; margin-bottom: 20px;">➕ Ajouter une Entreprise au Carnet</h3>
+                <form onsubmit="createTrackedCompany(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="trackedCompanyName" style="display: block; margin-bottom: 5px; font-weight: 600;">Nom de l'entreprise :</label>
+                        <input type="text" id="trackedCompanyName" required style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: TechCorp, Restaurant Chez Paul...">
+                    </div>
+                    <div>
+                        <label for="trackedCompanySector" style="display: block; margin-bottom: 5px; font-weight: 600;">Secteur :</label>
+                        <input type="text" id="trackedCompanySector" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: Commerce, Industrie, Numérique...">
+                    </div>
+                    <div>
+                        <label for="trackedCompanyContact" style="display: block; margin-bottom: 5px; font-weight: 600;">Contact (optionnel) :</label>
+                        <input type="text" id="trackedCompanyContact" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" placeholder="Ex: Marie Dupont">
+                    </div>
+                    <button type="submit" style="background: #95c11f; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        Ajouter au Carnet
+                    </button>
+                </form>
+            `;
+            openModal('Nouvelle Entreprise', content);
+        }
+
+        function createTrackedCompany(event) {
+            event.preventDefault();
+            const name = document.getElementById('trackedCompanyName').value.trim();
+            const sector = document.getElementById('trackedCompanySector').value.trim();
+            const contact = document.getElementById('trackedCompanyContact').value.trim();
+            
+            if (!name) return;
+            
+            const newCompany = {
+                id: Date.now(),
+                name: name,
+                sector: sector || 'Non spécifié',
+                contact: contact || '',
+                presentation: false,
+                question: false,
+                cv: false,
+                suivi: false,
+                ressenti: ''
+            };
+            
+            companyTracker.push(newCompany);
+            updateTrackerDisplay();
+            closeModal();
+            showNotification(`✅ Entreprise "${name}" ajoutée au carnet !`);
+        }
+
+        function updateTrackerDisplay() {
+            const trackerBody = document.getElementById('trackerBody');
+            const emptyTracker = document.getElementById('emptyTracker');
+            
+            if (companyTracker.length === 0) {
+                emptyTracker.style.display = 'block';
+                document.getElementById('companyTracker').style.display = 'none';
+                return;
+            }
+            
+            emptyTracker.style.display = 'none';
+            document.getElementById('companyTracker').style.display = 'table';
+            
+            trackerBody.innerHTML = '';
+            
+            companyTracker.forEach((company, index) => {
+                const row = document.createElement('tr');
+                row.style.cssText = `
+                    background: ${index % 2 === 0 ? 'white' : '#f8f9fa'};
+                    border-bottom: 1px solid #e9ecef;
+                    transition: all 0.3s ease;
+                `;
+                
+                row.innerHTML = `
+                    <td style="padding: 15px; border-right: 1px solid #e9ecef;">
+                        <div style="font-weight: 600; color: #171718; margin-bottom: 5px;">${company.name}</div>
+                        <div style="font-size: 0.9rem; color: #6c757d;">${company.sector}</div>
+                        ${company.contact ? `<div style="font-size: 0.8rem; color: #6c757d; margin-top: 3px;">${company.contact}</div>` : ''}
+                    </td>
+                    <td style="padding: 15px; text-align: center; border-right: 1px solid #e9ecef;">
+                        <label style="cursor: pointer; display: inline-block;">
+                            <input type="checkbox" ${company.presentation ? 'checked' : ''} onchange="updateCompanyStatus(${company.id}, 'presentation', this.checked)" style="display: none;">
+                            <div class="checkbox-custom" style="width: 35px; height: 35px; border: 3px solid ${company.presentation ? '#95c11f' : '#e9ecef'}; border-radius: 10px; background: ${company.presentation ? 'linear-gradient(135deg, #95c11f 0%, #7ba518 100%)' : 'white'}; display: flex; align-items: center; justify-content: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin: 0 auto; box-shadow: ${company.presentation ? '0 6px 20px rgba(149,193,31,0.4)' : '0 2px 8px rgba(0,0,0,0.1)'}; transform: ${company.presentation ? 'scale(1.1)' : 'scale(1)'};">
+                                ${company.presentation ? '<span style="color: white; font-weight: bold; font-size: 1.2rem;">✓</span>' : ''}
+                            </div>
+                        </label>
+                    </td>
+                    <td style="padding: 15px; text-align: center; border-right: 1px solid #e9ecef;">
+                        <label style="cursor: pointer; display: inline-block;">
+                            <input type="checkbox" ${company.question ? 'checked' : ''} onchange="updateCompanyStatus(${company.id}, 'question', this.checked)" style="display: none;">
+                            <div class="checkbox-custom" style="width: 35px; height: 35px; border: 3px solid ${company.question ? '#95c11f' : '#e9ecef'}; border-radius: 10px; background: ${company.question ? 'linear-gradient(135deg, #95c11f 0%, #7ba518 100%)' : 'white'}; display: flex; align-items: center; justify-content: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin: 0 auto; box-shadow: ${company.question ? '0 6px 20px rgba(149,193,31,0.4)' : '0 2px 8px rgba(0,0,0,0.1)'}; transform: ${company.question ? 'scale(1.1)' : 'scale(1)'};">
+                                ${company.question ? '<span style="color: white; font-weight: bold; font-size: 1.2rem;">✓</span>' : ''}
+                            </div>
+                        </label>
+                    </td>
+                    <td style="padding: 15px; text-align: center; border-right: 1px solid #e9ecef;">
+                        <label style="cursor: pointer; display: inline-block;">
+                            <input type="checkbox" ${company.cv ? 'checked' : ''} onchange="updateCompanyStatus(${company.id}, 'cv', this.checked)" style="display: none;">
+                            <div class="checkbox-custom" style="width: 35px; height: 35px; border: 3px solid ${company.cv ? '#95c11f' : '#e9ecef'}; border-radius: 10px; background: ${company.cv ? 'linear-gradient(135deg, #95c11f 0%, #7ba518 100%)' : 'white'}; display: flex; align-items: center; justify-content: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin: 0 auto; box-shadow: ${company.cv ? '0 6px 20px rgba(149,193,31,0.4)' : '0 2px 8px rgba(0,0,0,0.1)'}; transform: ${company.cv ? 'scale(1.1)' : 'scale(1)'};">
+                                ${company.cv ? '<span style="color: white; font-weight: bold; font-size: 1.2rem;">✓</span>' : ''}
+                            </div>
+                        </label>
+                    </td>
+                    <td style="padding: 15px; text-align: center; border-right: 1px solid #e9ecef;">
+                        <label style="cursor: pointer; display: inline-block;">
+                            <input type="checkbox" ${company.suivi ? 'checked' : ''} onchange="updateCompanyStatus(${company.id}, 'suivi', this.checked)" style="display: none;">
+                            <div class="checkbox-custom" style="width: 35px; height: 35px; border: 3px solid ${company.suivi ? '#95c11f' : '#e9ecef'}; border-radius: 10px; background: ${company.suivi ? 'linear-gradient(135deg, #95c11f 0%, #7ba518 100%)' : 'white'}; display: flex; align-items: center; justify-content: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin: 0 auto; box-shadow: ${company.suivi ? '0 6px 20px rgba(149,193,31,0.4)' : '0 2px 8px rgba(0,0,0,0.1)'}; transform: ${company.suivi ? 'scale(1.1)' : 'scale(1)'};">
+                                ${company.suivi ? '<span style="color: white; font-weight: bold; font-size: 1.2rem;">✓</span>' : ''}
+                            </div>
+                        </label>
+                    </td>
+                    <td style="padding: 15px; text-align: center; border-right: 1px solid #e9ecef;">
+                        <div style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+                            <div style="display: flex; gap: 5px;">
+                                <button onclick="setFeeling(${company.id}, '😊')" style="background: ${company.ressenti === '😊' ? 'linear-gradient(135deg, #95c11f 0%, #7ba518 100%)' : '#f8f9fa'}; border: 2px solid ${company.ressenti === '😊' ? '#95c11f' : '#e9ecef'}; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1.3rem; transition: all 0.3s ease; color: ${company.ressenti === '😊' ? 'white' : '#171718'}; box-shadow: ${company.ressenti === '😊' ? '0 4px 15px rgba(149,193,31,0.3)' : 'none'};">😊</button>
+                                <button onclick="setFeeling(${company.id}, '🙂')" style="background: ${company.ressenti === '🙂' ? 'linear-gradient(135deg, #2897d5 0%, #1e7bb8 100%)' : '#f8f9fa'}; border: 2px solid ${company.ressenti === '🙂' ? '#2897d5' : '#e9ecef'}; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1.3rem; transition: all 0.3s ease; color: ${company.ressenti === '🙂' ? 'white' : '#171718'}; box-shadow: ${company.ressenti === '🙂' ? '0 4px 15px rgba(40,151,213,0.3)' : 'none'};">🙂</button>
+                                <button onclick="setFeeling(${company.id}, '😐')" style="background: ${company.ressenti === '😐' ? 'linear-gradient(135deg, #f39200 0%, #d17a00 100%)' : '#f8f9fa'}; border: 2px solid ${company.ressenti === '😐' ? '#f39200' : '#e9ecef'}; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1.3rem; transition: all 0.3s ease; color: ${company.ressenti === '😐' ? 'white' : '#171718'}; box-shadow: ${company.ressenti === '😐' ? '0 4px 15px rgba(243,146,0,0.3)' : 'none'};">😐</button>
+                                <button onclick="setFeeling(${company.id}, '😕')" style="background: ${company.ressenti === '😕' ? 'linear-gradient(135deg, #d60b52 0%, #b8094a 100%)' : '#f8f9fa'}; border: 2px solid ${company.ressenti === '😕' ? '#d60b52' : '#e9ecef'}; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1.3rem; transition: all 0.3s ease; color: ${company.ressenti === '😕' ? 'white' : '#171718'}; box-shadow: ${company.ressenti === '😕' ? '0 4px 15px rgba(214,11,82,0.3)' : 'none'};">😕</button>
+                            </div>
+                            <button onclick="addComment(${company.id})" style="background: #2897d5; color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">✏️</button>
+                        </div>
+                        ${company.comment ? `<div style="background: #f8f9fa; padding: 8px; border-radius: 8px; margin-top: 8px; font-size: 0.8rem; color: #6c757d; text-align: left;">${company.comment}</div>` : ''}
+                    </td>
+                    <td style="padding: 15px; text-align: center;">
+                        <button onclick="removeTrackedCompany(${company.id})" style="background: #d60b52; color: white; border: none; padding: 8px; border-radius: 50%; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            🗑️
+                        </button>
+                    </td>
+                `;
+                
+                trackerBody.appendChild(row);
+            });
+        }
+
+        function updateCompanyStatus(companyId, field, value) {
+            const company = companyTracker.find(c => c.id === companyId);
+            if (company) {
+                company[field] = value;
+                
+                // Ajouter des points selon l'action
+                if (value) {
+                    let points = 0;
+                    switch(field) {
+                        case 'presentation': points = 20; break;
+                        case 'question': points = 50; break;
+                        case 'cv': points = 100; break;
+                        case 'suivi': points = 200; break;
+                    }
+                    if (points > 0) {
+                        addScore(points);
+                        showNotification(`🎉 +${points} points pour ${field === 'presentation' ? 'la présentation' : field === 'question' ? 'la question posée' : field === 'cv' ? 'le CV déposé' : 'le suivi obtenu'} !`);
+                        
+                        // Animation de validation
+                        const checkbox = document.querySelector(`[onchange*="${companyId}"][onchange*="${field}"]`).nextElementSibling;
+                        checkbox.style.transform = 'scale(1.3)';
+                        setTimeout(() => {
+                            checkbox.style.transform = company[field] ? 'scale(1.1)' : 'scale(1)';
+                        }, 300);
+                    }
+                }
+                
+                updateTrackerDisplay();
+                updateStats();
+            }
+        }
+
+        function updateStats() {
+            const presentations = companyTracker.filter(c => c.presentation).length;
+            const questions = companyTracker.filter(c => c.question).length;
+            const cvs = companyTracker.filter(c => c.cv).length;
+            const suivis = companyTracker.filter(c => c.suivi).length;
+            
+            // Animation des compteurs
+            animateCounter('statPresentations', presentations);
+            animateCounter('statQuestions', questions);
+            animateCounter('statCVs', cvs);
+            animateCounter('statSuivis', suivis);
+        }
+
+        function animateCounter(elementId, targetValue) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const currentValue = parseInt(element.textContent) || 0;
+            const increment = targetValue > currentValue ? 1 : -1;
+            const duration = 300;
+            const steps = Math.abs(targetValue - currentValue);
+            const stepDuration = steps > 0 ? duration / steps : 0;
+            
+            let current = currentValue;
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = current;
+                
+                if (current === targetValue) {
+                    clearInterval(timer);
+                    // Animation de pulsation pour les nouveaux records
+                    if (targetValue > currentValue) {
+                        element.style.transform = 'scale(1.2)';
+                        element.style.color = '#95c11f';
+                        setTimeout(() => {
+                            element.style.transform = 'scale(1)';
+                            element.style.color = 'white';
+                        }, 400);
+                    }
+                }
+            }, stepDuration);
+        }
+
+        function setFeeling(companyId, feeling) {
+            const company = companyTracker.find(c => c.id === companyId);
+            if (company) {
+                company.ressenti = company.ressenti === feeling ? '' : feeling;
+                updateTrackerDisplay();
+                updateStats();
+                
+                // Animation du smiley sélectionné
+                const buttons = document.querySelectorAll(`[onclick="setFeeling(${companyId}, '${feeling}')"]`);
+                buttons.forEach(btn => {
+                    btn.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        btn.style.transform = 'scale(1)';
+                    }, 200);
+                });
+            }
+        }
+
+        function addComment(companyId) {
+            const company = companyTracker.find(c => c.id === companyId);
+            if (!company) return;
+            
+            const content = `
+                <h3 style="color: #2897d5; margin-bottom: 20px;">✏️ Commentaire - ${company.name}</h3>
+                <form onsubmit="saveComment(event, ${companyId})" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="companyComment" style="display: block; margin-bottom: 5px; font-weight: 600;">Ton ressenti / commentaire :</label>
+                        <textarea id="companyComment" rows="4" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; resize: vertical;" placeholder="Ex: Très bon accueil, poste intéressant, à recontacter la semaine prochaine...">${company.comment || ''}</textarea>
+                    </div>
+                    <button type="submit" style="background: #2897d5; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+                        Sauvegarder
+                    </button>
+                </form>
+            `;
+            openModal('Ajouter un Commentaire', content);
+        }
+
+        function saveComment(event, companyId) {
+            event.preventDefault();
+            const comment = document.getElementById('companyComment').value.trim();
+            const company = companyTracker.find(c => c.id === companyId);
+            
+            if (company) {
+                company.comment = comment;
+                updateTrackerDisplay();
+                closeModal();
+                showNotification('💬 Commentaire sauvegardé !');
+            }
+        }
+
+        function removeTrackedCompany(companyId) {
+            const company = companyTracker.find(c => c.id === companyId);
+            if (!company) return;
+            
+            const content = `
+                <h3 style="color: #d60b52; margin-bottom: 20px;">🗑️ Supprimer l'Entreprise</h3>
+                <p style="margin-bottom: 20px;">Êtes-vous sûr de vouloir supprimer <strong>"${company.name}"</strong> de votre carnet de bord ?</p>
+                <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 20px;">Cette action est irréversible.</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="closeModal()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                        Annuler
+                    </button>
+                    <button onclick="confirmRemoveTrackedCompany(${companyId})" style="background: #d60b52; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                        Supprimer
+                    </button>
+                </div>
+            `;
+            openModal('Confirmer Suppression', content);
+        }
+
+        function clearAllTracking() {
+            if (companyTracker.length === 0) {
+                showNotification('📝 Le carnet est déjà vide !');
+                return;
+            }
+            
+            const content = `
+                <h3 style="color: #d60b52; margin-bottom: 20px;">🗑️ Effacer Tout le Carnet</h3>
+                <p style="margin-bottom: 20px;">Êtes-vous sûr de vouloir supprimer <strong>toutes les entreprises</strong> de votre carnet de bord ?</p>
+                <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 20px;">Cette action supprimera définitivement ${companyTracker.length} entreprise(s) et tous les commentaires associés.</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="closeModal()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                        Annuler
+                    </button>
+                    <button onclick="confirmClearAllTracking()" style="background: #d60b52; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                        Tout Effacer
+                    </button>
+                </div>
+            `;
+            openModal('Confirmer Suppression', content);
+        }
+
+        function confirmClearAllTracking() {
+            companyTracker = [];
+            updateTrackerDisplay();
+            updateStats();
+            closeModal();
+            showNotification('🗑️ Carnet de bord effacé !');
+        }
+
+        function confirmRemoveTrackedCompany(companyId) {
+            companyTracker = companyTracker.filter(c => c.id !== companyId);
+            updateTrackerDisplay();
+            updateStats();
+            closeModal();
+            showNotification('🗑️ Entreprise supprimée du carnet !');
+        }
+
+        // Animations des boutons au survol
+        document.addEventListener('DOMContentLoaded', function() {
+            // Marquer la présence comme complétée au chargement
+            setTimeout(() => {
+                completeObjective('presence');
+            }, 1000);
+            
+            // Initialiser l'affichage du carnet
+            updateTrackerDisplay();
+            updateStats();
+            
+            // Ajouter les animations de survol pour les boutons
+            const style = document.createElement('style');
+            style.textContent = `
+                .checkbox-custom:hover {
+                    transform: scale(1.15) !important;
+                    box-shadow: 0 8px 25px rgba(149,193,31,0.5) !important;
+                }
+                
+                button:hover {
+                    transform: translateY(-2px) !important;
+                }
+                
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+                
+                .stat-pulse {
+                    animation: pulse 0.6s ease-in-out;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9915df20a5b66f0a',t:'MTc2MDkzNTU4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
